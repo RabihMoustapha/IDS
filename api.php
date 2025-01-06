@@ -36,7 +36,7 @@ function handlePost($pdo, $input)
 {
     $sql = "INSERT INTO profile (email, password, name) VALUES (:email, :password, :name)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $input['id']], ['email' => $input['email']], ['password' => $input['password']], ['name' => $input['name']]);
+    $stmt->execute(['email' => $input['email'], 'password' => $input['password'], 'name' => $input['name']]);
     echo json_encode(['message' => 'User created successfully']);
 }
 
@@ -44,7 +44,7 @@ function handlePut($pdo, $input)
 {
     $sql = "UPDATE profile SET name = :name, email = :email, password = :password WHERE id = :id";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $input['id']], ['email' => $input['email']], ['password' => $input['password']], ['name' => $input['name']]);
+    $stmt->execute(['id' => $input['id'], 'email' => $input['email'], 'password' => $input['password'], 'name' => $input['name']]);
     echo json_encode(['message' => 'User updated successfully']);
 }
 
