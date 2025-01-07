@@ -25,7 +25,7 @@ switch ($method) {
 
 function handleGet($pdo)
 {
-    $sql = "SELECT * FROM profile";
+    $sql = "SELECT * FROM link";
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,24 +34,24 @@ function handleGet($pdo)
 
 function handlePost($pdo, $input)
 {
-    $sql = "INSERT INTO profile (email, password, name) VALUES (:email, :password, :name)";
+    $sql = "INSERT INTO link (url) VALUES (:url)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['email' => $input['email'], 'password' => $input['password'], 'name' => $input['name']]);
-    echo json_encode(['message' => 'User created successfully']);
+    $stmt->execute(['url'=>$input['url']]);
+    echo json_encode(['message' => 'Link created successfully']);
 }
 
 function handlePut($pdo, $input)
 {
-    $sql = "UPDATE profile SET name = :name, email = :email, password = :password WHERE id = :id";
+    $sql = "UPDATE link SET url = :url";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $input['id'], 'email' => $input['email'], 'password' => $input['password'], 'name' => $input['name']]);
-    echo json_encode(['message' => 'User updated successfully']);
+    $stmt->execute(['url' => $input['url']]);
+    echo json_encode(['message' => 'Link updated successfully']);
 }
 
 function handleDelete($pdo, $input)
 {
-    $sql = "DELETE FROM profile WHERE id = :id";
+    $sql = "DELETE FROM link WHERE url = :url";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $input['id']]);
-    echo json_encode(['message' => 'User deleted successfully']);
+    $stmt->execute(['url' => $input['url']]);
+    echo json_encode(['message' => 'Link deleted successfully']);
 }
