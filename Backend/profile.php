@@ -1,5 +1,4 @@
 <?php
-require "vendor/autoload.php";
 header("Content-Type: application/json");
 include 'db.php';
 
@@ -56,3 +55,4 @@ function handleDelete($pdo, $input)
     $stmt->execute(['id' => $input['id']]);
     echo json_encode(['message' => 'Profile deleted successfully']);
 }
+?>
