@@ -1,5 +1,6 @@
 * {
     font-family: monospace;
+    color: white;
     font-weight: bold;
 }
 
@@ -7,7 +8,6 @@ body {
     background-size: cover;
     background-position: center;
     background: url("../Images/Background.jpeg");
-    color: white;
 }
 
 .footer {
@@ -17,34 +17,34 @@ body {
     padding: 20px 0;
     text-align: center;
     width: 100%;
-  }
-  
-  .footer-container {
+}
+
+.footer-container {
     width: 90%;
     margin: 0 auto;
-  }
-  
-  .footer p {
+}
+
+.footer p {
     margin: 0;
     font-size: 14px;
-  }
-  
-  .footer-links {
+}
+
+.footer-links {
     list-style-type: none;
     padding: 0;
-  }
-  
-  .footer-links li {
+}
+
+.footer-links li {
     display: inline;
     margin: 0 10px;
-  }
-  
-  .footer-links a {
+}
+
+.footer-links a {
     color: white;
     text-decoration: none;
     font-size: 14px;
-  }
-  
-  .footer-links a:hover {
+}
+
+.footer-links a:hover {
     text-decoration: underline;
-  }
+}

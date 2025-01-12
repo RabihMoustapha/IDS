@@ -13,7 +13,7 @@
 
 </head>
 
-<body>
+<body onload="getItems()">
     <!--Header-->
     <form action="javascript:void(0)" method="post" onclick="addItem()">
         <header>
@@ -53,13 +53,59 @@
                         </ul>
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Click</button>
+                            <button class="btn btn-outline-success" type="submit" onclick="getItems()">Click</button>
                         </form>
                     </div>
                 </div>
             </nav>
         </header>
     </form>
+    <h1>To-do CRUD</h1>
+    <h3>Add</h3>
+    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+        <input type="text" id="add-name" placeholder="New to-do">
+        <input type="submit" value="Add">
+    </form>
+
+    <div id="editForm">
+        <h3>Edit</h3>
+        <form action="javascript:void(0);" onsubmit="updateItem()">
+            <input type="hidden" id="edit-id">
+            <input type="checkbox" id="edit-isComplete">
+            <input type="text" id="edit-name">
+            <input type="submit" value="Save">
+            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
+        </form>
+    </div>
+
+    <p id="counter"></p>
+
+    <table>
+        <tr>
+            <th>Is Complete?</th>
+            <th>Name</th>
+            <th></th>
+            <th></th>
+        </tr>
+        <tbody id="todos"></tbody>
+    </table>
+
+    <script src="JS/home.js" asp-append-version="true"></script>
+    <script type="text/javascript">
+        getItems();
+    </script>
+    <tbody id="todos"></tbody>
+    <!--Footer-->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>WebApi. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="tel:+961818140764">Phone Number</a></li>
+                <li><a href="mailto:mostapharabih59@gmail.com">Email</a></li>
+                <li><a href="https://github.com/RabihMoustapha">GitHub</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
 
 </html>

@@ -15,7 +15,7 @@
 
 <body>
     <!--Header-->
-    <form action="javascript:void(0)" method="post" onclick="addItem()">
+    <form action="javascript:void(0)" method="post">
         <header>
             <nav class="navbar navbar-expand-lg bg-body-tertiary">
                 <div class="container-fluid">
@@ -53,7 +53,7 @@
                         </ul>
                         <form class="d-flex" role="search">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit">Click</button>
+                            <button class="btn btn-outline-success" type="submit" onclick="getItem()">Search</button>
                         </form>
                     </div>
                 </div>
@@ -61,16 +61,28 @@
         </header>
     </form>
     <!--Login form-->
-    <form class="form-floating" action="javascript:void(0)" method="post" onclick="login()">
+    <form class="form-floating" action="javascript:void(0)" method="post">
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
-            <label for="floatingInput">Email address</label>
+            <input type="email" class="form-control" id="usermail" placeholder="email@example.com">
+            <label for="usermail">Email address</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-            <label for="floatingPassword">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="Password">
+            <label for="password">Password</label>
+            <button class="btn btn-outline-success" onclick="login(event)">Login</button>
         </div>
     </form>
+    <!--Footer-->
+    <footer class="footer">
+        <div class="footer-container">
+            <p>WebApi. All rights reserved.</p>
+            <ul class="footer-links">
+                <li><a href="tel:+961818140764">Phone Number</a></li>
+                <li><a href="mailto:mostapharabih59@gmail.com">Email</a></li>
+                <li><a href="https://github.com/RabihMoustapha">GitHub</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
 
 </html>
