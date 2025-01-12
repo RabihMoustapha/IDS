@@ -20,10 +20,10 @@
                     <input type="text" placeholder="E.G search here">
                 </td>
                 <td>
-                    <a href="addpost.html"><img class="icons" src="Images/Plus.png"></a>
+                    <a href="addpost.php"><img class="icons" src="Images/Plus.png"></a>
                 </td>
                 <td>
-                    <a href="profile.html"><img class="icons" src="Images/Profile.png"></a>
+                    <a href="profile.php"><img class="icons" src="Images/Profile.png"></a>
                 </td>
             </tr>
         </table>
