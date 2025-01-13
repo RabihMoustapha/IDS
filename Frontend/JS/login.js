@@ -5,11 +5,12 @@ function handleLogin() {
     const password = document.getElementById('password').value;
 
     // Replace this with the backend URL that handles login
-    const loginUrl = 'login.php';
+    const loginUrl = 'http://localhost/IDS/Backend/profile.php';
 
     const loginData = {
         email: email,
-        password: password
+        password: password,
+        action: "login"
     };
 
     fetch(loginUrl, {
@@ -52,5 +53,6 @@ const updatedItem = {
     isComplete: true,
     name: 'newemail@example.com'
 };
+
 const itemId = 1;  // Assuming item ID is 1
 updateItem(itemId, updatedItem);
