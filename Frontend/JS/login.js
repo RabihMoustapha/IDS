@@ -1,47 +1,56 @@
-// login.js
-function login(event) {
-    event.preventDefault(); // Prevent the default form submission behavior
+const url = 'http://localhost/IDS/Backend/profile.php';
+// Assuming you want to send data to a backend PHP script using JavaScript
+function handleLogin() {
+    const email = document.getElementById('usermail').value;
+    const password = document.getElementById('password').value;
 
-    // Get user input values from the form
-    const usermail = document.getElementById('usermail').value.trim();
-    const password = document.getElementById('password').value.trim();
+    // Replace this with the backend URL that handles login
+    const loginUrl = 'login.php';
 
-    // Validate the form fields
-    if (!usermail || !password) {
-        alert('Please enter both usermail and password.');
-        return;
-    }
-
-    // Prepare the login credentials
-    const credentials = {
-        usermail: usermail,
+    const loginData = {
+        email: email,
         password: password
     };
 
-    // The PHP backend URL that will handle the login
-    const apiUrl = 'http://localhost/IDS/Backend/profile.php';  // Change as per your setup
-
-    // Send a POST request to the backend (PHP API)
-    fetch(apiUrl, {
+    fetch(loginUrl, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'  // We're sending JSON data
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(credentials)  // Convert the credentials object to a JSON string
+        body: JSON.stringify(loginData)
     })
-        .then(response => response.json())  // Parse the JSON response from PHP
+        .then(response => response.json())
         .then(data => {
-            if (data.token) {
-                // Successful login: store token in localStorage or sessionStorage
-                localStorage.setItem('authToken', data.token);  // Store token in browser storage (for example)
-                window.location.href = 'home.php';  // Redirect to a different page (e.g., dashboard)
+            if (data.success) {
+                window.location.href = 'home.php';  // Redirect on successful login
             } else {
-                // Invalid credentials or other error
-                alert(data.message || 'Login failed. Please try again.');
+                alert('Login failed. Please try again.');
             }
         })
-        .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred during login. Please try again.');
-        });
+        .catch(error => console.error('Error logging in:', error));
+
+    return false;  // Prevent form from submitting the traditional way
 }
+
+// Function to update item (for demonstration purposes, make sure `id` and `item` are defined properly)
+function updateItem(id, item) {
+    fetch(`${url}/${id}`, {
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
+    })
+        .then(response => response.json())
+        .then(() => getItems())
+        .catch(error => console.error('Unable to update item.', error));
+}
+
+// Example usage of updateItem
+const updatedItem = {
+    isComplete: true,
+    name: 'newemail@example.com'
+};
+const itemId = 1;  // Assuming item ID is 1
+updateItem(itemId, updatedItem);
