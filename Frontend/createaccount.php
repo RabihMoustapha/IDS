@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
-    <link type="text/css" href="CSS/login.css" rel="stylesheet">
-    <script type="text/javascript" src="JS/login.js"></script>
+    <title>CreateAccount</title>
+    <link type="text/css" href="CSS/createaccount.css" rel="stylesheet">
+    <script type="text/javascript" src="JS/createaccount.js"></script>
     <link rel="icon" type="image/x-icon" href="Images/api.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -60,8 +60,12 @@
             </nav>
         </header>
     </form>
-    <!--Login form-->
-    <form class="form-floating" action="javascript:void(0)" method="get">
+    <!--createaccount form-->
+    <form class="form-floating" action="javascript:void(0)" method="post">
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="username" placeholder="Paul">
+            <label for="username">Name</label>
+        </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="usermail" placeholder="email@example.com">
             <label for="usermail">Email address</label>
@@ -69,7 +73,7 @@
         <div class="form-floating">
             <input type="password" class="form-control" id="password" placeholder="Password">
             <label for="password">Password</label>
-            <button class="btn btn-outline-success" onclick="login()">Login</button>
+            <button class="btn btn-outline-success" onclick="createaccount()">createaccount</button>
         </div>
     </form>
     <!--Footer-->
