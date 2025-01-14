@@ -8,7 +8,7 @@
     <link type="text/css" href="CSS/AddPost.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="text/javascript" src="JS/addpost.js"></script>
+    <script type="text/javascript" src="JS/Post/AddPost.js"></script>
     <link rel="icon" type="image/x-icon" href="Images/api.png">
 
 </head>
@@ -61,15 +61,18 @@
         </header>
     </form>
 
-    <div class="mb-3">
-        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-    </div>
-    <div class="mb-3">
-        <label for="exampleFormControlTextarea1" class="form-label">Title</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-        <button type="button" class="btn btn-success">Submit</button>
-    </div>
+    <!--Adding labels-->
+    <form class="row g-3 needs-validation" onsubmit="addPost()">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address</label>
+            <input type="email" class="form-control" id="email" placeholder="name@example.com">
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <textarea class="form-control" id="title" rows="3"></textarea>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+    </form>
 </body>
 
 </html>

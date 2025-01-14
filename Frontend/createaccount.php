@@ -73,7 +73,7 @@
         <div class="form-floating">
             <input type="password" class="form-control" id="password" placeholder="Password">
             <label for="password">Password</label>
-            <button class="btn btn-outline-success" onclick="createaccount()">createaccount</button>
+            <button class="btn btn-outline-success" onclick="createaccount()">Create</button>
         </div>
     </form>
     <!--Footer-->
