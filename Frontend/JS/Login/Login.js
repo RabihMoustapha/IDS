@@ -1,16 +1,17 @@
-const url = 'http://localhost/IDS/Backend/profile.php';
+const profile = 'http://localhost/IDS/Backend/profile.php';
+const post = 'http://localhost/IDS/Backend/post.php';
 var email = document.getElementById('usermail').value;
 var password = document.getElementById('password').value;
 
 function login() {
-    fetch(url)
+    fetch(profile)
         .then(response => response.json())
         .then(data => isloggedin(data))
     //.catch(error => console.error('Unable to get items.', error));
 }
 
 function isloggedin(data) {
-    var isMatch = data.some(element => {
+    const isMatch = data.some(element => {
         return element.email === email && element.password === password;
     });
 
@@ -23,4 +24,11 @@ function isloggedin(data) {
 
 function teleport() {
     window.location.href = 'Home.php';
+}
+
+function getItem() {
+    fetch(post)
+        .then(response => response.json())
+        .then(data => isloggedin(data))
+        .catch(error => console.error('Unable to get items.', error));
 }
