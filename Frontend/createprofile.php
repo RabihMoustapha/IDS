@@ -7,7 +7,7 @@
     <title>Create profile</title>
     <link type="text/css" href="CSS/createprofile.php" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <script type="text/javascript" src="JS/createprofile.js"></script>
+    <script type="text/javascript" src="JS/Profile/CreateProfile.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="icon" type="image/x-icon" href="Images/api.png">
 </head>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Profile</title>
     <link type="text/css" href="CSS/profile.css" rel="stylesheet">
-    <script type="text/javascript" src="JS/profile.js"></script>
+    <script type="text/javascript" src="JS/Profile/Profile.js"></script>
     <link rel="icon" type="image/x-icon" href="Images/api.png">
 
 </head>

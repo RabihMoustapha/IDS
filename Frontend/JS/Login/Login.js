@@ -22,5 +22,5 @@ function isloggedin(data) {
 }
 
 function teleport() {
-    window.location.href = 'home.php';
+    window.location.href = 'Home.php';
 }
