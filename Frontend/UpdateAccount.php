@@ -63,8 +63,8 @@
     <!--Update List-->
     <form class="row g-3 needs-validation" onsubmit="update()">
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="first-name" required>
-            <label for="first-name">First name</label>
+            <input type="text" class="form-control" id="name" required>
+            <label for="first-name">Name</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="email" required>

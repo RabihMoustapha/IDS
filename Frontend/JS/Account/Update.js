@@ -1,17 +1,17 @@
 const profile = 'http://localhost/IDS/Backend/profile.php';
 const post = 'http://localhost/IDS/Backend/post.php';
-var email = document.getElementById('usermail').value;
+var email = document.getElementById('email').value;
 var password = document.getElementById('password').value;
+var name = document.getElementById('name').value;
 
 function update() {
-    const itemId = document.getElementById('edit-id').value;
     const item = {
-        id: parseInt(itemId, 10),
-        isComplete: document.getElementById('edit-isComplete').checked,
-        name: document.getElementById('edit-name').value.trim()
+        name,
+        email,
+        password
     };
 
-    fetch(`${uri}/${itemId}`, {
+    fetch(`${profile}/${email}`, {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
@@ -19,10 +19,27 @@ function update() {
         },
         body: JSON.stringify(item)
     })
-        .then(() => getItems())
-        .catch(error => console.error('Unable to update item.', error));
-
-    closeInput();
+        .then(() => getItem())
+        .catch(error => console.error('Unable to update account.', error));
 
     return false;
+}
+
+function getItem() {
+    fetch(post)
+        .then(response => response.json())
+        .then(data => isloggedin(data))
+        .catch(error => console.error('Unable to get items.', error));
+}
+
+function isloggedin(data) {
+    const isMatch = data.some(element => {
+        return element.email === email && element.password === password;
+    });
+
+    if (isMatch) {
+        window.location.href = 'Home.php';
+    } else {
+        alert('Not matched');
+    }
 }
