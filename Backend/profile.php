@@ -26,9 +26,9 @@ switch ($method) {
 //Need to put the data
 function handleGet($pdo)
 {
-    $sql = "SELECT * FROM profile where email = :email";
+    $sql = "SELECT * FROM profile";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':email', $_GET['email'], PDO::PARAM_STR );
+    //$stmt->bindParam(':email', $_GET['email'], PDO::PARAM_STR );
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
@@ -38,7 +38,7 @@ function handlePost($pdo, $input)
 {
     $sql = "INSERT INTO profile (email, password, name) VALUES (:email, :password, :name)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['email' => $input['email'], 'password' => $input['password'], 'name' => $input['name']]);
+    $stmt->execute(['email' => $input['email'], 'password' => $input['password']]);
     echo json_encode(['message' => 'Profile created successfully']);
 }
 
@@ -57,3 +57,4 @@ function handleDelete($pdo, $input)
     $stmt->execute(['id' => $input['id']]);
     echo json_encode(['message' => 'Profile deleted successfully']);
 }
+?>

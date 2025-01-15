@@ -7,7 +7,7 @@ function login() {
     fetch(profile)
         .then(response => response.json())
         .then(data => isloggedin(data))
-        //.catch(error => console.error('Unable to get items.', error));
+        .catch(error => console.error('Unable to get items.', error));
 }
 
 function getItem() {
@@ -18,13 +18,11 @@ function getItem() {
 }
 
 function isloggedin(data) {
-    const isMatch = data.some(element => {
-        return element.email === email.value && element.password === password.value;
-    });
-
-    if (isMatch) {
-        window.location.href = 'Home.php';
-    } else {
-        alert('Not matched');
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function () {
+        const myObj = JSON.parse(this.responseText);
+        document.getElementById("demo").innerHTML = myObj.name;
     }
+    xmlhttp.open("GET", "../../Backend/profile.php");
+    xmlhttp.send();
 }
