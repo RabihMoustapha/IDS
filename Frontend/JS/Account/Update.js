@@ -1,8 +1,8 @@
 const profile = 'http://localhost/IDS/Backend/profile.php';
 const post = 'http://localhost/IDS/Backend/post.php';
-var email = document.getElementById('email').value;
-var password = document.getElementById('password').value;
-var name = document.getElementById('name').value;
+var email = document.getElementById('email');
+var password = document.getElementById('password');
+var name = document.getElementById('name');
 
 function update() {
     const item = {
@@ -34,7 +34,7 @@ function getItem() {
 
 function isloggedin(data) {
     const isMatch = data.some(element => {
-        return element.email === email && element.password === password;
+        return element.email === email.value && element.password === password.value;
     });
 
     if (isMatch) {

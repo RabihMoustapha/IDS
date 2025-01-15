@@ -5,28 +5,30 @@ include 'db.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
 
-    switch ($method) {
-        case 'GET':
-            handleGet($pdo);
-            break;
-        case 'POST':
-            handlePost($pdo, $input);
-            break;
-        case 'PUT':
-            handlePut($pdo, $input);
-            break;
-        case 'DELETE':
-            handleDelete($pdo, $input);
-            break;
-        default:
-            echo json_encode(['message' => 'Invalid request method']);
-            break;
-    }
+switch ($method) {
+    case 'GET':
+        handleGet($pdo);
+        break;
+    case 'POST':
+        handlePost($pdo, $input);
+        break;
+    case 'PUT':
+        handlePut($pdo, $input);
+        break;
+    case 'DELETE':
+        handleDelete($pdo, $input);
+        break;
+    default:
+        echo json_encode(['message' => 'Invalid request method']);
+        break;
+}
 
+//Need to put the data
 function handleGet($pdo)
 {
-    $sql = "SELECT * FROM profile";
+    $sql = "SELECT * FROM profile where email = :email";
     $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':email', $_GET['email'], PDO::PARAM_STR );
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);

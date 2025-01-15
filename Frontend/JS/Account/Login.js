@@ -1,13 +1,13 @@
 const profile = 'http://localhost/IDS/Backend/profile.php';
 const post = 'http://localhost/IDS/Backend/post.php';
-var email = document.getElementById('email').value;
-var password = document.getElementById('password').value;
+var email = document.getElementById('email');
+var password = document.getElementById('password');
 
 function login() {
     fetch(profile)
         .then(response => response.json())
         .then(data => isloggedin(data))
-        .catch(error => console.error('Unable to get items.', error));
+        //.catch(error => console.error('Unable to get items.', error));
 }
 
 function getItem() {
@@ -19,7 +19,7 @@ function getItem() {
 
 function isloggedin(data) {
     const isMatch = data.some(element => {
-        return element.email === email && element.password === password;
+        return element.email === email.value && element.password === password.value;
     });
 
     if (isMatch) {

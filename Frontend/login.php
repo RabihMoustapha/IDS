@@ -65,13 +65,13 @@
     <!--Login form-->
     <form class="form-floating" action="javascript:void(0)" method="get">
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="email" placeholder="email@example.com" required>
+            <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
             <label for="email">Email address</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="password" placeholder="Password" required>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             <label for="password">Password</label>
-            <button class="btn btn-outline-success" onclick="login()">Login</button>
+            <input type="button" class="btn btn-outline-success" onclick="login()" value="Login">
         </div>
     </form>
 

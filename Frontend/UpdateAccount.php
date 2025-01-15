@@ -61,10 +61,10 @@
     </form>
 
     <!--Update List-->
-    <form class="row g-3 needs-validation" onsubmit="update()">
+    <form class="form-floating" onsubmit="update()">
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="name" required>
-            <label for="first-name">Name</label>
+            <label for="name">Name</label>
         </div>
         <div class="form-floating mb-3">
             <input type="email" class="form-control" id="email" required>
@@ -75,7 +75,7 @@
             <label for="password" class="form-label">Password</label>
         </div>
         <div class="col-12">
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <input type="submit" class="btn btn-primary"value="Submit">
         </div>
     </form>
 
