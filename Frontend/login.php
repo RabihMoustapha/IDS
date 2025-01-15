@@ -74,9 +74,6 @@
             <input type="button" class="btn btn-outline-success" onclick="login()" value="Login">
         </div>
     </form>
-    <script>
-        login()
-    </script>
     <!--Footer-->
     <footer class="footer">
         <div class="footer-container">

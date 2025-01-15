@@ -28,7 +28,7 @@ function handleGet($pdo)
 {
     $sql = "SELECT * FROM profile";
     $stmt = $pdo->prepare($sql);
-    //$stmt->bindParam(':email', $_GET['email'], PDO::PARAM_STR );
+    // $stmt->bindParam(':email', $_GET['email'], PDO::PARAM_STR );
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
