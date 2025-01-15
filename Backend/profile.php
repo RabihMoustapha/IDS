@@ -38,7 +38,7 @@ function handlePost($pdo, $input)
 {
     $sql = "INSERT INTO profile (email, password, name) VALUES (:email, :password, :name)";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['email' => $input['email'], 'password' => $input['password']]);
+    $stmt->execute(['email' => $input['email'], 'password' => $input['password'], 'name' => $input['name']]);
     echo json_encode(['message' => 'Profile created successfully']);
 }
 
