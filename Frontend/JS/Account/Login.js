@@ -18,11 +18,13 @@ function getItem() {
 }
 
 function isloggedin(data) {
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function () {
-        const myObj = JSON.parse(this.responseText);
-        document.getElementById("demo").innerHTML = myObj.name;
+    const isMatch = data.some(element => {
+        return element.email === email.value && element.password === password.value;
+    });
+
+    if (isMatch) {
+        window.location.href = 'Home.php';
+    } else {
+        alert('Not matched');
     }
-    xmlhttp.open("GET", "../../Backend/profile.php");
-    xmlhttp.send();
 }
