@@ -19,7 +19,7 @@ function getItem() {
 
 function isloggedin(data) {
     const isMatch = data.some(element => {
-        return element.email === email.value && element.password === password.value;
+        return element.email === email.value && element.password === password.value
     });
 
     if (isMatch) {
