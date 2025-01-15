@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CreateAccount</title>
     <link type="text/css" href="CSS/CreateAccount.css" rel="stylesheet">
-    <script type="text/javascript" src="JS/Login/CreateAccount.js"></script>
+    <script type="text/javascript" src="JS/Account/Create.js"></script>
     <link rel="icon" type="image/x-icon" href="Images/api.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
