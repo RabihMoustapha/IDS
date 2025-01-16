@@ -10,7 +10,7 @@ $password = $_GET['password'];
 
 switch ($method) {
     case 'GET':
-        handleGet($pdo);
+        handleGet($pdo, $email, $password);
         break;
     case 'POST':
         handlePost($pdo, $input);
@@ -26,17 +26,17 @@ switch ($method) {
         break;
 }
 
-//Need to put the data
-function handleGet($pdo)
+function handleGet($pdo, $email, $password)
 {
-    $sql = "SELECT * FROM profile";
+    $sql = "SELECT * FROM profile where email = :email";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute(['email' => $email]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if($result['email'] == $_GET['email'] && $result['password'] == $_GET['password']){
-        echo json_encode(['success'=>true]);
+    if ($result && password_verify($password, $result['password'])) {
+        echo json_encode(['success' => true]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Invalid email or password']);
     }
-    echo json_encode($result);
 }
 
 function handlePost($pdo, $input)
@@ -62,4 +62,3 @@ function handleDelete($pdo, $input)
     $stmt->execute(['id' => $input['id']]);
     echo json_encode(['message' => 'Profile deleted successfully']);
 }
-?>

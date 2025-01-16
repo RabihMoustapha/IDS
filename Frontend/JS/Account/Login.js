@@ -14,7 +14,7 @@ function login() {
                 alert('Login failed: ' + data.message)
             }
         })
-        .catch(error => alert('Error', error));
+        .catch(error => console.log('Error', error));
 }
 
 function getItem() {
