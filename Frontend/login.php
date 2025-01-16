@@ -63,17 +63,18 @@
     </form>
 
     <!--Login form-->
-    <form class="form-floating" action="javascript:void(0)" method="post">
+    <form class="form-floating" action="javascript:void(0)" method="get">
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
+            <input autocomplete="email" type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
             <label for="email">Email address</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <input autocomplete="password" type="password" class="form-control" id="password" name="password" placeholder="Password" required>
             <label for="password">Password</label>
             <input type="button" class="btn btn-outline-success" onclick="login()" value="Login">
         </div>
     </form>
+
     <!--Footer-->
     <footer class="footer">
         <div class="footer-container">
@@ -85,7 +86,6 @@
             </ul>
         </div>
     </footer>
-
 </body>
 
 </html>

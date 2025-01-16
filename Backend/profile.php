@@ -1,12 +1,17 @@
 <?php
-header("Content-Type: application/json");
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json, charset=UTF-8");
 include 'db.php';
 include '../Frontend/Login.php';
-
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
-$email = $_GET['email'];
-$password = $_GET['password'];
+$email = $_GET['email'] ?? null;
+$password = $_GET['password'] ?? null;
+
+if (empty($email) || empty($password)) {
+    echo json_encode(['message' => 'Email and password are required.']);
+    exit;
+}
 
 switch ($method) {
     case 'GET':
@@ -28,14 +33,14 @@ switch ($method) {
 
 function handleGet($pdo, $email, $password)
 {
-    $sql = "SELECT * FROM profile where email = :email";
+    $sql = "SELECT * FROM profile where email = :email and password = :password";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['email' => $email]);
+    $stmt->execute(['email' => $email, 'password'=>$password]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($result && password_verify($password, $result['password'])) {
-        echo json_encode(['success' => true]);
+    if ($result) {
+        echo json_encode(array("status" => "success", "data" => $result));
     } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid email or password']);
+        echo json_encode(array("status" => "error", "message" => "No data found."));
     }
 }
 

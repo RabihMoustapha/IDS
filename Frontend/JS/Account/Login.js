@@ -1,25 +1,39 @@
 const profile = 'http://localhost/IDS/Backend/profile.php';
 const post = 'http://localhost/IDS/Backend/post.php';
-const email = document.getElementById('email');
-const password = document.getElementById('password');
-
 
 function login() {
     fetch(profile)
-        .then(response => response.json())
-        .then(data => {
-            if(data.success){
-                window.location.href = 'Home.php';
-            }else{
-                alert('Login failed: ' + data.message)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.status);
+            } else {
+                return response.json();
             }
         })
-        .catch(error => console.log('Error', error));
+        .then(data => {
+            if (data.success) {
+                window.location.href = 'Home.php';
+            } else {
+                alert('Login failed: ' + data.message);
+            }
+        })
+        .catch(error => alert('Error' + error));
 }
 
 function getItem() {
     fetch(post)
-        .then(response => response.json())
-        .then(data => isloggedin(data))
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                window.location.href = 'Home.php';
+            } else {
+                alert('Login failed: ' + data.message);
+            }
+        })
         .catch(error => console.error('Unable to get items.', error));
 }
