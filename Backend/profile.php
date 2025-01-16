@@ -1,9 +1,12 @@
 <?php
 header("Content-Type: application/json");
 include 'db.php';
+include '../Frontend/Login.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
+$email = $_GET['email'];
+$password = $_GET['password'];
 
 switch ($method) {
     case 'GET':
@@ -28,9 +31,11 @@ function handleGet($pdo)
 {
     $sql = "SELECT * FROM profile";
     $stmt = $pdo->prepare($sql);
-    // $stmt->bindParam(':email', $_GET['email'], PDO::PARAM_STR );
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if($result['email'] == $_GET['email'] && $result['password'] == $_GET['password']){
+        echo json_encode(['success'=>true]);
+    }
     echo json_encode($result);
 }
 
