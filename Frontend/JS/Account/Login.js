@@ -11,10 +11,10 @@ function login() {
             }
         })
         .then(data => {
-            if (data.success) {
+            if (data.status = 'success') {
                 window.location.href = 'Home.php';
             } else {
-                alert('Login failed: ' + data.message);
+                console.log('Login failed: ' + data.message);
             }
         })
         .catch(error => alert('Error' + error));

@@ -2,20 +2,12 @@
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json, charset=UTF-8");
 include 'db.php';
-include '../Frontend/Login.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
-$email = $_GET['email'] ?? null;
-$password = $_GET['password'] ?? null;
-
-if (empty($email) || empty($password)) {
-    echo json_encode(['message' => 'Email and password are required.']);
-    exit;
-}
 
 switch ($method) {
     case 'GET':
-        handleGet($pdo, $email, $password);
+        handleGet($pdo);
         break;
     case 'POST':
         handlePost($pdo, $input);
@@ -31,11 +23,11 @@ switch ($method) {
         break;
 }
 
-function handleGet($pdo, $email, $password)
+function handleGet($pdo)
 {
-    $sql = "SELECT * FROM profile where email = :email and password = :password";
+    $sql = "SELECT * FROM profile";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['email' => $email, 'password' => $password]);
+    $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) {
         echo json_encode(array("status" => "success", "data" => $result));
