@@ -5,8 +5,13 @@ include 'db.php';
 include '../Frontend/Login.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
-$email = $_GET['email'];
-$password = $_GET['password'];
+$email = $_GET['email'] ?? null;
+$password = $_GET['password'] ?? null;
+
+if (empty($email) || empty($password)) {
+    echo json_encode(['message' => 'Email and password are required.']);
+    exit;
+}
 
 switch ($method) {
     case 'GET':
