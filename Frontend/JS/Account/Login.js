@@ -14,10 +14,10 @@ function login() {
             if (data.success) {
                 window.location.href = 'Home.php';
             } else {
-                console.log('Login failed: ' + data.message);
+                alert('Login failed: ' + data.message);
             }
         })
-        .catch(error => console.log('Error' + error));
+        .catch(error => alert('Error' + error));
 }
 
 function getItem() {
