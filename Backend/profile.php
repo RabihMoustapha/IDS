@@ -8,11 +8,6 @@ $input = json_decode(file_get_contents('php://input'), true);
 $email = $_GET['email'];
 $password = $_GET['password'];
 
-if (empty($email) || empty($password)) {
-    echo json_encode(['message' => 'Email and password are required.']);
-    exit;
-}
-
 switch ($method) {
     case 'GET':
         handleGet($pdo, $email, $password);
