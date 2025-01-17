@@ -5,8 +5,8 @@ include 'db.php';
 include '../Frontend/Login.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
-$email = $_GET['email'] ?? null;
-$password = $_GET['password'] ?? null;
+$email = $_GET['email'];
+$password = $_GET['password'];
 
 if (empty($email) || empty($password)) {
     echo json_encode(['message' => 'Email and password are required.']);
@@ -35,7 +35,7 @@ function handleGet($pdo, $email, $password)
 {
     $sql = "SELECT * FROM profile where email = :email and password = :password";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['email' => $email, 'password'=>$password]);
+    $stmt->execute(['email' => $email, 'password' => $password]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) {
         echo json_encode(array("status" => "success", "data" => $result));
