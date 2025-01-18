@@ -25,9 +25,10 @@ switch ($method) {
 
 function handleGet($pdo)
 {
-    $sql = "SELECT * FROM searchbar";
+    $query = isset($_GET['q']) ? $_GET['q'] : '';
+    $sql = "SELECT * FROM searchbar WHERE title LIKE :query OR content LIKE :query";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+    $stmt->execute(['query' => "%$query%"]);
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
 }
@@ -37,7 +38,9 @@ function handlePost($pdo, $input)
     $sql = "INSERT INTO searchbar (title, hashtag, keyword) VALUES (:title, :hashtag, :keyword)";
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['title' => $input['title'], 'hashtag' => $input['hashtag'], 'keyword' => $input['keyword']]);
-    echo json_encode(['message' => 'Searchbar created successfully']);
+    // Assuming the backend sends a token upon successful login
+    $token = bin2hex(random_bytes(16)); // Generate a random token
+    echo json_encode(['message' => 'Searchbar created successfully', 'token' => $token]);
 }
 
 function handlePut($pdo, $input)

@@ -22,7 +22,7 @@ switch ($method) {
         break;
 }
 
-//Get request
+// Get request
 function handleGet($pdo)
 {
     $sql = "SELECT * FROM profile";
@@ -36,22 +36,24 @@ function handleGet($pdo)
     }
 }
 
-//Post request
+// Post request
 function handlePost($pdo, $input)
 {
-    $sql = "SELECT * FROM profile where email = :email";
+    $sql = "SELECT * FROM profile WHERE email = :email and password = :password";
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':email', $input['email']);
+    $stmt->bindParam(':password', $input['password']);
     $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    if ($result && password_verify($input['password'], $result['password'])) {
-        echo json_encode(['success' => true, 'message' => 'Login successful']);
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        $token = bin2hex(random_bytes(16)); // Generate a simple token
+        echo json_encode(['success' => true, 'message' => 'Login successful', 'token' => $token]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Invalid username or password']);
+        echo json_encode(['success' => false, 'message' => 'Invalid email or password']);
     }
 }
 
-//Put request
+// Put request
 function handlePut($pdo, $input)
 {
     $sql = "UPDATE profile SET name = :name, email = :email, password = :password WHERE id = :id";
@@ -60,7 +62,7 @@ function handlePut($pdo, $input)
     echo json_encode(['message' => 'Profile updated successfully']);
 }
 
-//Delete request
+// Delete request
 function handleDelete($pdo, $input)
 {
     $sql = "DELETE FROM profile WHERE id = :id";
@@ -68,3 +70,4 @@ function handleDelete($pdo, $input)
     $stmt->execute(['id' => $input['id']]);
     echo json_encode(['message' => 'Profile deleted successfully']);
 }
+?>

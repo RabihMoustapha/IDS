@@ -51,15 +51,19 @@
                                 <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                             </li>
                         </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit" onclick="getItem()">Search</button>
+                        <form class="d-flex" role="search" method="post" onsubmit="getItem(event)">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery" oninput="getItem(event)">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
             </nav>
         </header>
     </form>
+
+    <!-- Output for search results -->
+    <div id="output"></div>
+
     <!--createaccount form-->
     <form class="form-floating" action="javascript:void(0)" method="post">
         <div class="form-floating mb-3">

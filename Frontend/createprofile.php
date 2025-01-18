@@ -50,9 +50,9 @@
                                 <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                             </li>
                         </ul>
-                        <form class="d-flex" role="search">
-                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                            <button class="btn btn-outline-success" type="submit" onclick="addItem()">Click</button>
+                        <form class="d-flex" role="search" method="post" onsubmit="getItem(event)">
+                            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery" oninput="getItem(event)">
+                            <button class="btn btn-outline-success" type="submit">Search</button>
                         </form>
                     </div>
                 </div>
@@ -124,6 +124,10 @@
             <button class="btn btn-primary" type="submit">Submit form</button>
         </div>
     </form>
+
+    <!-- Output for search results -->
+    <div id="output"></div>
+
     <!--Footer-->
     <footer class="footer">
         <div class="footer-container">
