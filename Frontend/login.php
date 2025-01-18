@@ -52,17 +52,18 @@
                             <a class="nav-link disabled" aria-disabled="true">Disabled</a>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search" action="javascript:void(0)" method="get" onsubmit="getItem(event)">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery" oninput="getItem(event)">
+                    <form class="d-flex" role="search" action="javascript:void(0)" method="get" onsubmit="getItem()" style="flex-grow: 1; margin-right: 10px;">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery" oninput="getItem()">
                         <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
+                    <button class="btn btn-outline-danger" type="button" onclick="logout()" style="height: 38px;"><img src="Icons/logout.png" style="width: 20px; height: 20px;"></button>
                 </div>
             </div>
         </nav>
     </header>
 
     <!--Login form-->
-    <form id="loginForm" class="form-floating" action="javascript:void(0)" method="post" onsubmit="login()">
+    <form class="form-floating" action="javascript:void(0)" method="post" onsubmit="login()">
         <div class="form-floating mb-3">
             <input autocomplete="email" type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
             <label for="email">Email address</label>

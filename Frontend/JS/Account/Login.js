@@ -1,27 +1,26 @@
 // Readable values and APIs
 const email = document.getElementById("email");
 const password = document.getElementById("password");
+const query = document.getElementById("searchQuery").value;
 const profile = "http://localhost/IDS/Backend/profile.php";
-const post = "http://localhost/IDS/Backend/searchbar.php";
+const searchbar = "http://localhost/IDS/Backend/searchbar.php";
 
-// Check if user is logged in
 function isLoggedIn() {
     return !!localStorage.getItem("userToken");
 }
 
-// Read items from the database
-function getItem(event) {
-    event.preventDefault();
+function getItem() {
     if (!isLoggedIn()) {
         alert("You must be logged in to search.");
         window.location.href = "Login.php";
+        query = "";
+        return;
     }
-    const query = document.getElementById("searchQuery").value;
     if (query.length < 3) {
         document.getElementById("output").innerHTML = "";
         return;
     }
-    fetch(`${post}?q=${query}`)
+    fetch(`${searchbar}?q=${query}`)
         .then((response) => response.json())
         .then((data) => {
             let output = "<ul class='list-group'>";
@@ -71,3 +70,12 @@ async function login() {
         password.value = "";
     }
 }
+
+// Logout function
+function logout() {
+    localStorage.removeItem("userToken");
+    window.location.href = "Login.php";
+}
+
+document.getElementById("searchQuery").addEventListener("input", getItem);
+document.querySelector("form[role='search']").addEventListener("submit", getItem);

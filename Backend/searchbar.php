@@ -1,7 +1,6 @@
 <?php
 header("Content-Type: application/json");
 include 'db.php';
-
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
 
@@ -25,22 +24,22 @@ switch ($method) {
 
 function handleGet($pdo)
 {
-    $query = isset($_GET['q']) ? $_GET['q'] : '';
-    $sql = "SELECT * FROM searchbar WHERE title LIKE :query OR content LIKE :query";
+    $sql = "SELECT * FROM searchbar";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['query' => "%$query%"]);
+    $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     echo json_encode($result);
 }
 
 function handlePost($pdo, $input)
 {
-    $sql = "INSERT INTO searchbar (title, hashtag, keyword) VALUES (:title, :hashtag, :keyword)";
+    $sql = "SELECT * FROM searchbar WHERE title = :query OR title LIKE :query";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['title' => $input['title'], 'hashtag' => $input['hashtag'], 'keyword' => $input['keyword']]);
-    // Assuming the backend sends a token upon successful login
-    $token = bin2hex(random_bytes(16)); // Generate a random token
-    echo json_encode(['message' => 'Searchbar created successfully', 'token' => $token]);
+    $stmt->bindParam(':query', $input['title']);
+    $stmt->bindParam(':query', $input['hashtag']);
+    $stmt->bindParam(':query', $input['keyword']);
+    $stmt->execute();
+    echo json_encode(['message' => 'Searchbar entry created successfully']);
 }
 
 function handlePut($pdo, $input)
