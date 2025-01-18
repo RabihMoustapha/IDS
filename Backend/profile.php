@@ -2,7 +2,7 @@
 header("Content-Type: application/json");
 include 'db.php';
 $method = $_SERVER['REQUEST_METHOD'];
-$input = json_decode(file_get_contents('php://input'));
+$input = json_decode(file_get_contents('php://input'), true);
 
 switch ($method) {
     case 'GET':
@@ -22,6 +22,7 @@ switch ($method) {
         break;
 }
 
+//Get request
 function handleGet($pdo)
 {
     $sql = "SELECT * FROM profile";
@@ -35,6 +36,7 @@ function handleGet($pdo)
     }
 }
 
+//Post request
 function handlePost($pdo, $input)
 {
     $sql = "SELECT * FROM profile where email = :email";
@@ -49,7 +51,7 @@ function handlePost($pdo, $input)
     }
 }
 
-
+//Put request
 function handlePut($pdo, $input)
 {
     $sql = "UPDATE profile SET name = :name, email = :email, password = :password WHERE id = :id";
@@ -58,6 +60,7 @@ function handlePut($pdo, $input)
     echo json_encode(['message' => 'Profile updated successfully']);
 }
 
+//Delete request
 function handleDelete($pdo, $input)
 {
     $sql = "DELETE FROM profile WHERE id = :id";

@@ -1,32 +1,36 @@
-const email = document.getElementById('email').value;
-const password = document.getElementById('password').value;
+//Readable values and apis
+const email = document.getElementById('email');
+const password = document.getElementById('password');
+const profile = 'http://localhost/IDS/Backend/profile.php';
+const post = 'http://localhost/IDS/Backend/post.php';
 
-// function getItem() {
-//     fetch(post)
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('Network response was not ok: ' + response.status);
-//             }
-//             return response.json();
-//         })
-//         .then(data => {
-//             if (data.success) {
-//                 window.location.href = 'Home.php';
-//             } else {
-//                 alert('Login failed: ' + data.message);
-//             }
-//         })
-//         .catch(error => console.error('Unable to get items.', error));
-// }
+//Read items from the database
+function getItem() {
+    fetch(post)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            if (data.success) {
+                window.location.href = 'Home.php';
+            } else {
+                alert('Login failed: ' + data.message);
+            }
+        })
+        .catch(error => console.error('Unable to get items.', error));
+}
 
-async function login(email, password) {
-    const url = "http://localhost/IDS/Backend/profile.php";
+//Login function
+async function login() {
     const requestData = {
-        email: email,
-        password: password,
+        email: email.value,
+        password: password.value,
     };
     try {
-        const response = await fetch(url, {
+        const response = await fetch(profile, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -35,12 +39,15 @@ async function login(email, password) {
         });
         if (!response.ok) throw new Error("Login Failed");
         const data = await response.json();
-        if (data) {
-            //sessionStorage.setItem("token", data.token);
+        if (data.success) {
             window.location.href = "Home.php";
+        }else{
+            alert("Login failed: " + data.message);
+            email.value = "";
+            password.value = "";
         }
     } catch (err) {
-        email.current.value = "";
-        password.current.value = "";
+        email.value = "";
+        password.value = "";
     }
 }
