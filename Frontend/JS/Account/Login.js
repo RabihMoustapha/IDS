@@ -1,3 +1,4 @@
+// Readable values and APIs
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const query = document.getElementById("searchQuery").value;
@@ -8,34 +9,35 @@ function isLoggedIn() {
     return localStorage.getItem("userToken");
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    if (!isLoggedIn()) {
-        document.getElementById("searchQuery").disabled = true;
-        document.querySelector("button[type='submit']").disabled = true;
-    }
-});
-
-function getItem() {
-
-    const item = {
-        hashtag: query,
-
+async function login() {
+    const requestData = {
+        email: email.value,
+        password: password.value,
     };
-
-    fetch(searchbar, {
-        method: "POST",
-        headers: {
-            "Accept": "application/json",
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(item)
-    })
-        .then(response => response.json())
-        .then(() => {
-            getItem();
-            searchQuery.value = "";
-        })
-        .catch(error => console.error("Unable to get items.", error));
+    try {
+        const response = await fetch(profile, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        });
+        if (!response.ok) throw new Error("Login Failed");
+        const data = await response.json();
+        if (data.success) {
+            localStorage.setItem("userToken", data.token); // Assuming the backend sends a token
+            window.location.href = "Home.php";
+        } else {
+            alert("Login failed: " + data.message);
+            email.value = "";
+            password.value = "";
+        }
+    } catch (err) {
+        console.error("Login error:", err);
+        alert("An error occurred during login.");
+        email.value = "";
+        password.value = "";
+    }
 }
 
 function logout() {
