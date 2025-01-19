@@ -1,60 +1,63 @@
 <?php
-header("Content-Type: application/json");
+header('Content-Type: application/json');
 include 'db.php';
+
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
 
 switch ($method) {
-    case 'GET':
-        handleGet($pdo);
-        break;
     case 'POST':
         handlePost($pdo, $input);
         break;
+
+    case 'GET':
+        handleGet($pdo);
+        break;
+
     case 'PUT':
         handlePut($pdo, $input);
         break;
+
     case 'DELETE':
         handleDelete($pdo, $input);
         break;
-    default:
-        echo json_encode(['message' => 'Invalid request method']);
-        break;
-}
 
-function handleGet($pdo)
-{
-    $sql = "SELECT * FROM searchbar";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result);
+    default:
+        echo json_encode(["error" => "Unsupported request method"]);
+        break;
 }
 
 function handlePost($pdo, $input)
 {
-    $sql = "SELECT * FROM searchbar WHERE title LIKE :query OR hashtag LIKE :query OR keyword LIKE :query";
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':query', $input['query']);
-    $stmt->bindParam(':query', $input['query']);
-    $stmt->bindParam(':query', $input['query']);
+    $query = "SELECT name FROM searchbar WHERE hashtag LIKE :searchTerm";
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(":searchTerm", $input['query']);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result);
+    if ($result) {
+        echo json_encode(["status" => true, "data" => $result]);
+    } else {
+        echo json_encode(["status" => false, "message" => "No data found"]);
+    }
+}
+
+function handleGet($pdo)
+{
+    $query = "SELECT * FROM searchbar";
+    $stmt = $pdo->prepare($query);
+    $stmt->execute();
+    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($results);
 }
 
 function handlePut($pdo, $input)
 {
-    $sql = "UPDATE searchbar SET keyword = :keyword where hashtag = :hashtag and title = :title";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['title' => $input['title'], 'hashtag' => $input['hashtag'], 'keyword' => $input['keyword']]);
-    echo json_encode(['message' => 'Searchbar updated successfully']);
+    // Add your PUT logic here
+    echo json_encode(["message" => "PUT request received"]);
 }
 
 function handleDelete($pdo, $input)
 {
-    $sql = "DELETE FROM searchbar WHERE title = :title and hashtag = :hashtag";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute(['title' => $input['title'], 'hashtag' => $input['hashtag']]);
-    echo json_encode(['message' => 'Searchbar deleted successfully']);
+    // Add your DELETE logic here
+    echo json_encode(["message" => "DELETE request received"]);
 }

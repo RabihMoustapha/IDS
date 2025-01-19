@@ -37,20 +37,7 @@
                                 <img src="Images/plus.png" style="width: 20px; height: 20px;">
                             </a>
                         </li>
-                        <!-- <li class="nav-item dropdown">
-                            <a style="height: 38px" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                <img src="Images/delete.png" style="width: 20px; height: 20px;" onclick="dropdown()">
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="deletepost.php">Post</a></li>
-                                <li><a class="dropdown-item" href="deletehistory.php">History</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="deleteothers.php">Others</a></li>
-                            </ul>
-                        </li>
-                    </ul> -->
+                    </ul>
                     <form class="d-flex" role="search" action="javascript:void(0)" method="get" onsubmit="getItem()" style="flex-grow: 1; margin-right: 10px;">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery" oninput="getItem()">
                         <button class="btn btn-outline-success" style="height: 38px;" type="submit"><img src="Images/search.png" style="height: 20px; width: 20px"></button>
