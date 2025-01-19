@@ -20,7 +20,6 @@
     <header>
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <a class="navbar-brand" href="logout.php"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -29,15 +28,18 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+                            <a class="nav-link active" aria-current="page" href="home.php" style="height: 38px;">
+                                <img src="Images/home.png" style="width: 20px; height: 20px;">
+                            </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="addpost.php">Add</a>
+                            <a class="nav-link active" aria-current="page" href="addpost.php" style="height: 38px;">
+                                <img src="Images/plus.png" style="width: 20px; height: 20px;">
+                            </a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Dropdown
+                        <!-- <li class="nav-item dropdown">
+                            <a style="height: 38px" class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src="Images/delete.png" style="width: 20px; height: 20px;" onclick="dropdown()">
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="deletepost.php">Post</a></li>
@@ -45,18 +47,15 @@
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
-                                <li><a class="dropdown-item" href="deleteothers">Others</a></li>
+                                <li><a class="dropdown-item" href="deleteothers.php">Others</a></li>
                             </ul>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-                        </li>
-                    </ul>
+                    </ul> -->
                     <form class="d-flex" role="search" action="javascript:void(0)" method="get" onsubmit="getItem()" style="flex-grow: 1; margin-right: 10px;">
                         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery" oninput="getItem()">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="btn btn-outline-success" style="height: 38px;" type="submit"><img src="Images/search.png" style="height: 20px; width: 20px"></button>
                     </form>
-                    <button class="btn btn-outline-danger" type="button" onclick="logout()" style="height: 38px;"><img src="Icons/logout.png" style="width: 20px; height: 20px;"></button>
+                    <button class="btn btn-outline-danger" type="button" onclick="logout()" style="height: 38px;"><img src="Images/logout.png" style="width: 20px; height: 20px;"></button>
                 </div>
             </div>
         </nav>
@@ -76,7 +75,10 @@
     </form>
 
     <!-- Output for search results -->
-    <div id="output" style="display: none;"></div>
+    <div id="output" style="display: none;" class="container mt-3">
+        <h3>Search Results:</h3>
+        <div id="results" class="row"></div>
+    </div>
 
     <!--Scripts-->
     <script type="text/javascript" src="JS/Account/Login.js"></script>

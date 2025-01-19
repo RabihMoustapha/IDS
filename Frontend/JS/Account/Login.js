@@ -6,40 +6,57 @@ const profile = "http://localhost/IDS/Backend/profile.php";
 const searchbar = "http://localhost/IDS/Backend/searchbar.php";
 
 function isLoggedIn() {
-    return !!localStorage.getItem("userToken");
+    return localStorage.getItem("userToken");
 }
 
-function getItem() {
-    if (!isLoggedIn()) {
-        alert("You must be logged in to search.");
-        window.location.href = "Login.php";
-        query = "";
-        return;
-    }
+async function getItem() {
+    const query = document.getElementById("searchQuery").value;
     if (query.length < 3) {
-        document.getElementById("output").innerHTML = "";
+        document.getElementById("output").style.display = "none";
         return;
     }
-    fetch(`${searchbar}?q=${query}`)
-        .then((response) => response.json())
-        .then((data) => {
-            let output = "<ul class='list-group'>";
-            data.forEach(function (item) {
-                output += `
-                <li class="list-group-item">
-                    <h5>${item.title}</h5>
-                    <p>${item.content}</p>
-                </li>
-                `;
-            });
-            output += "</ul>";
-            document.getElementById("output").innerHTML = output;
-            document.getElementById("output").style.display = "block"; // Show the output
-        })
-        .catch(error => console.error("Unable to get items.", error));
+
+    try {
+        const response = await fetch(searchbar, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ query: query }),
+        });
+        if (!response.ok) throw new Error("Search Failed");
+        const data = await response.json();
+        displayResults(data);
+    } catch (err) {
+        console.error("Search error:", err);
+        alert("An error occurred during search.");
+    }
 }
 
-// Login function
+function displayResults(data) {
+    const resultsContainer = document.getElementById("results");
+    resultsContainer.innerHTML = "";
+    if (data.length === 0) {
+        resultsContainer.innerHTML = "<p>No results found.</p>";
+    } else {
+        data.forEach(item => {
+            const resultItem = document.createElement("div");
+            resultItem.className = "col-md-4";
+            resultItem.innerHTML = `
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">${item.title}</h5>
+                        <p class="card-text">${item.keyword}</p>
+                        <p class="card-text"><small class="text-muted">${item.hashtag}</small></p>
+                    </div>
+                </div>
+            `;
+            resultsContainer.appendChild(resultItem);
+        });
+    }
+    document.getElementById("output").style.display = "block";
+}
+
 async function login() {
     const requestData = {
         email: email.value,
@@ -71,11 +88,7 @@ async function login() {
     }
 }
 
-// Logout function
 function logout() {
     localStorage.removeItem("userToken");
     window.location.href = "Login.php";
 }
-
-document.getElementById("searchQuery").addEventListener("input", getItem);
-document.querySelector("form[role='search']").addEventListener("submit", getItem);

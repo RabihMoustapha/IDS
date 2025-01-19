@@ -44,7 +44,7 @@
                                     <li>
                                         <hr class="dropdown-divider">
                                     </li>
-                                    <li><a class="dropdown-item" href="deleteothers">Others</a></li>
+                                    <li><a class="dropdown-item" href="deleteothers.php">Others</a></li>
                                 </ul>
                             </li>
                             <li class="nav-item">

@@ -33,13 +33,14 @@ function handleGet($pdo)
 
 function handlePost($pdo, $input)
 {
-    $sql = "SELECT * FROM searchbar WHERE title = :query OR title LIKE :query";
+    $sql = "SELECT * FROM searchbar WHERE title LIKE :query OR hashtag LIKE :query OR keyword LIKE :query";
     $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':query', $input['title']);
-    $stmt->bindParam(':query', $input['hashtag']);
-    $stmt->bindParam(':query', $input['keyword']);
+    $stmt->bindParam(':query', $input['query']);
+    $stmt->bindParam(':query', $input['query']);
+    $stmt->bindParam(':query', $input['query']);
     $stmt->execute();
-    echo json_encode(['message' => 'Searchbar entry created successfully']);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    echo json_encode($result);
 }
 
 function handlePut($pdo, $input)
