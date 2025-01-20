@@ -1,7 +1,6 @@
 <?php
 header('Content-Type: application/json');
 include 'db.php';
-
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
 
@@ -23,27 +22,28 @@ switch ($method) {
         break;
 
     default:
-        echo json_encode(["error" => "Unsupported request method"]);
+        echo json_encode(['error' => 'Unsupported request method']);
         break;
 }
 
 function handlePost($pdo, $input)
 {
-    $query = "SELECT name FROM searchbar WHERE hashtag LIKE :searchTerm";
+    $search = '%' . $input['query'] . '%';
+    $query = 'SELECT * FROM searchbar WHERE keyword LIKE :search OR title LIKE :search OR hashtag LIKE :search';
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(":searchTerm", $input['query']);
+    $stmt->bindParam(':search', $search);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) {
-        echo json_encode(["status" => true, "data" => $result]);
+        echo json_encode(['status' => true, 'item' => $result]);
     } else {
-        echo json_encode(["status" => false, "message" => "No data found"]);
+        echo json_encode(['status' => false, 'message' => 'No data found']);
     }
 }
 
 function handleGet($pdo)
 {
-    $query = "SELECT * FROM searchbar";
+    $query = 'SELECT * FROM searchbar';
     $stmt = $pdo->prepare($query);
     $stmt->execute();
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -53,11 +53,11 @@ function handleGet($pdo)
 function handlePut($pdo, $input)
 {
     // Add your PUT logic here
-    echo json_encode(["message" => "PUT request received"]);
+    echo json_encode(['message' => 'PUT request received']);
 }
 
 function handleDelete($pdo, $input)
 {
     // Add your DELETE logic here
-    echo json_encode(["message" => "DELETE request received"]);
+    echo json_encode(['message' => 'DELETE request received']);
 }

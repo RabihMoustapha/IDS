@@ -28,7 +28,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="home.php" style="height: 38px;">
+                            <a class="nav-link active" aria-current="page" href="Home.php" style="height: 38px;">
                                 <img src="Images/home.png" style="width: 20px; height: 20px;">
                             </a>
                         </li>
@@ -52,9 +52,9 @@
                             </ul>
                         </li>
                     </ul>
-                    <form class="d-flex" role="search" action="javascript:void(0)" method="get" onsubmit="getItem()" style="flex-grow: 1; margin-right: 10px;">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery" oninput="getItem()">
-                        <button class="btn btn-outline-success" style="height: 38px;" type="submit"><img src="Images/search.png" style="height: 20px; width: 20px"></button>
+                    <form class="d-flex" role="search" action="javascript:void(0)" method="post" onsubmit="getItem()" style="flex-grow: 1; margin-right: 10px;">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery" disabled>
+                        <button class="btn btn-outline-success" style="height: 38px;" type="submit" disabled><img src="Images/search.png" style="height: 20px; width: 20px"></button>
                     </form>
                     <button class="btn btn-outline-danger" type="button" onclick="logout()" style="height: 38px;"><img src="Images/logout.png" style="width: 20px; height: 20px;"></button>
                 </div>
@@ -76,27 +76,7 @@
     </form>
 
     <!-- Output for search results -->
-    <div id="output" style="display: none;" class="container mt-3">
-        <h3>Search Results:</h3>
-        <div id="results" class="row"></div>
-    </div>
-
-    <!-- Results Container -->
-    <div id="resultsContainer" class="container mt-3" style="display: none;">
-        <h3>Search Results:</h3>
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Link</th>
-                </tr>
-            </thead>
-            <tbody id="resultsTableBody">
-                <!-- Search results will be inserted here -->
-            </tbody>
-        </table>
-    </div>
+    <table border="5" style="padding: 10px; margin: 10px; color: white" id="output" class="output"></table>
 
     <!--Scripts-->
     <script type="text/javascript" src="JS/Account/Login.js"></script>

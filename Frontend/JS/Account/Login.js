@@ -1,7 +1,7 @@
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const query = document.getElementById("searchQuery");
-const output = document.getElementById("output");
+const table = document.getElementById("output");
 const profile = "http://localhost/IDS/Backend/profile.php";
 const searchbar = "http://localhost/IDS/Backend/searchbar.php";
 
@@ -46,11 +46,6 @@ function logout() {
 }
 
 async function getItem() {
-    if (!isLoggedIn()) {
-        alert("Please login to view search results.");
-        return;
-    }
-
     const requestData = {
         query: query.value,
     };
@@ -64,31 +59,27 @@ async function getItem() {
         });
         if (!response.ok) throw new Error("Search Failed");
         const data = await response.json();
-        console.log("Search results:", data);
-        const resultsContainer = document.getElementById("resultsTableBody");
-        resultsContainer.innerHTML = "";
+        if (data.status === true) {
+            for (var i = 0; i < data.item.length; i++) {
+                output.innerHTML = `<tr>
+                                    <th>Keyword</th>
+                                    <th>Hashtag</th>
+                                    <th>Title</th>
+                                </tr>
+                                <tr>
+                                    <td>${data.item[i].keyword}</td>
+                                    <td>${data.item[i].hashtag}</td>
+                                    <td>${data.item[i].title}</td>
+                                </tr>`;
 
-        if (data.status === true && data.data.length > 0) {
-            data.data.forEach(item => {
-                const row = document.createElement("tr");
-                const titleCell = document.createElement("td");
-                titleCell.textContent = item.title;
-                row.appendChild(titleCell);
-                const descriptionCell = document.createElement("td");
-                descriptionCell.textContent = item.description;
-                row.appendChild(descriptionCell);
-                const linkCell = document.createElement("td");
-                linkCell.innerHTML = `<a href="${item.link}">${item.link}</a>`;
-                row.appendChild(linkCell);
-                resultsContainer.appendChild(row);
-            });
-            document.getElementById("resultsContainer").style.display = "block";
+            }
         } else {
-            document.getElementById("resultsContainer").style.display = "none";
+            alert("Fatal error " + data.message);
+            query.value = "";
         }
     } catch (err) {
-        console.error("Search error:", err);
-        alert("An error occurred during search: " + err.message);
-        document.getElementById("resultsContainer").style.display = "none";
+        console.error("An error:", err);
+        alert("An error occurred during fetching." + err);
+        query.value = "";
     }
 }
