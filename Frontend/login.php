@@ -53,8 +53,8 @@
                         </li>
                     </ul>
                     <form class="d-flex" role="search" action="javascript:void(0)" method="post" onsubmit="getItem()" style="flex-grow: 1; margin-right: 10px;">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery" disabled>
-                        <button class="btn btn-outline-success" style="height: 38px;" type="submit" disabled><img src="Images/search.png" style="height: 20px; width: 20px"></button>
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery">
+                        <button class="btn btn-outline-success" style="height: 38px;" type="submit"><img src="Images/search.png" style="height: 20px; width: 20px"></button>
                     </form>
                     <button class="btn btn-outline-danger" type="button" onclick="logout()" style="height: 38px;"><img src="Images/logout.png" style="width: 20px; height: 20px;"></button>
                 </div>
@@ -76,7 +76,13 @@
     </form>
 
     <!-- Output for search results -->
-    <table border="5" style="padding: 10px; margin: 10px; color: white" id="output" class="output"></table>
+    <table border="5" id="output" class="container mt-3">
+        <tr>
+            <th style="color: white">Keyword</th>
+            <th style="color: red">Title</th>
+            <th style="color: lime">Hashtag</th>
+        </tr>
+    </table>
 
     <!--Scripts-->
     <script type="text/javascript" src="JS/Account/Login.js"></script>

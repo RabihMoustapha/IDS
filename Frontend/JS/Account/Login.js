@@ -61,15 +61,11 @@ async function getItem() {
         const data = await response.json();
         if (data.status === true) {
             for (var i = 0; i < data.item.length; i++) {
-                output.innerHTML = `<tr>
-                                    <th>Keyword</th>
-                                    <th>Hashtag</th>
-                                    <th>Title</th>
-                                </tr>
+                output.innerHTML = `
                                 <tr>
-                                    <td>${data.item[i].keyword}</td>
-                                    <td>${data.item[i].hashtag}</td>
-                                    <td>${data.item[i].title}</td>
+                                    <td style="color: white">${data.item[i].keyword}</td>
+                                    <td style="color: red">${data.item[i].title}</td>
+                                    <td style="color: lime">${data.item[i].hashtag}</td>
                                 </tr>`;
 
             }
