@@ -47,64 +47,48 @@ function logout() {
 
 async function getItem() {
     if (!isLoggedIn()) {
-        alert("Please login to view your profile.");
+        alert("Please login to view search results.");
         return;
-    } else {
-        const requestData = {
-            query: query.value,
-        };
-        try {
-            const response = await fetch(searchbar, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(requestData),
+    }
+
+    const requestData = {
+        query: query.value,
+    };
+    try {
+        const response = await fetch(searchbar, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+        });
+        if (!response.ok) throw new Error("Search Failed");
+        const data = await response.json();
+        console.log("Search results:", data);
+        const resultsContainer = document.getElementById("resultsTableBody");
+        resultsContainer.innerHTML = "";
+
+        if (data.status === true && data.data.length > 0) {
+            data.data.forEach(item => {
+                const row = document.createElement("tr");
+                const titleCell = document.createElement("td");
+                titleCell.textContent = item.title;
+                row.appendChild(titleCell);
+                const descriptionCell = document.createElement("td");
+                descriptionCell.textContent = item.description;
+                row.appendChild(descriptionCell);
+                const linkCell = document.createElement("td");
+                linkCell.innerHTML = `<a href="${item.link}">${item.link}</a>`;
+                row.appendChild(linkCell);
+                resultsContainer.appendChild(row);
             });
-            if (!response.ok) throw new Error("Search Failed");
-            const data = await response.json();
-            console.log("Search results:", data);
-            const resultsContainer = document.getElementById("results");
-            resultsContainer.innerHTML = "";
-
-            if (data.status === true && data.data.length > 0) {
-                const table = document.createElement("table");
-                table.className = "table table-striped";
-                const thead = document.createElement("thead");
-                const headerRow = document.createElement("tr");
-                const headers = ["HashTag", "Title", "Keyword"];
-                headers.forEach(headerText => {
-                    const th = document.createElement("th");
-                    th.textContent = headerText;
-                    headerRow.appendChild(th);
-                });
-                thead.appendChild(headerRow);
-                table.appendChild(thead);
-
-                const tbody = document.createElement("tbody");
-                data.data.forEach(item => {
-                    const row = document.createElement("tr");
-                    const tagCell = document.createElement("td");
-                    tagCell.textContent = item.hashtag;
-                    row.appendChild(nameCell);
-                    const titleCell = document.createElement("td");
-                    titleCell.textContent = item.title;
-                    row.appendChild(titleCell);
-                    const keywordCell = document.createElement("td");
-                    keywordCell.textContent = item.keyword;
-                    row.appendChild(keywordCell);
-                    tbody.appendChild(row);
-                });
-                table.appendChild(tbody);
-                resultsContainer.appendChild(table);
-                output.style.display = "block";
-            } else {
-                output.style.display = "none";
-            }
-        } catch (err) {
-            console.error("Search error:", err);
-            alert("An error occurred during search: " + err.message);
-            output.style.display = "none";
+            document.getElementById("resultsContainer").style.display = "block";
+        } else {
+            document.getElementById("resultsContainer").style.display = "none";
         }
+    } catch (err) {
+        console.error("Search error:", err);
+        alert("An error occurred during search: " + err.message);
+        document.getElementById("resultsContainer").style.display = "none";
     }
 }
