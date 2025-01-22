@@ -17,47 +17,14 @@
 <body>
 
     <!--Header-->
-    <header>
+    <header id="nav">
         <nav class="navbar navbar-expand-lg bg-body-tertiary">
             <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                    aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="Home.php" style="height: 38px;">
-                                <img src="Images/home.png" style="width: 20px; height: 20px;">
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="addpost.php" style="height: 38px;">
-                                <img src="Images/plus.png" style="width: 20px; height: 20px;">
-                            </a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                                aria-expanded="false">
-                                Dropdown
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="deletepost.php">Post</a></li>
-                                <li><a class="dropdown-item" href="deletehistory.php">History</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="deleteothers.php">Others</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class="d-flex" role="search" action="javascript:void(0)" method="post" onsubmit="getItem()" style="flex-grow: 1; margin-right: 10px;">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="searchQuery">
-                        <button class="btn btn-outline-success" style="height: 38px;" type="submit"><img src="Images/search.png" style="height: 20px; width: 20px"></button>
-                    </form>
-                    <button class="btn btn-outline-danger" type="button" onclick="logout()" style="height: 38px;"><img src="Images/logout.png" style="width: 20px; height: 20px;"></button>
-                </div>
+                <form class="d-flex" role="search" action="javascript:void(0)" method="post" onsubmit="getItem()" style="flex-grow: 1; margin-right: 10px;">
+                    <input class="form-control me-2" style="cursor: not-allowed" type="search" placeholder="Search" aria-label="Search" id="searchQuery" disabled="true">
+                    <button class="btn btn-outline-success" style="height: 38px" type="submit" disabled="true"><img src="Images/search.png" style="height: 20px; width: 20px"></button>
+                </form>
+                <button class="btn btn-outline-danger" style="cursor: pointer" type="button" onclick="logout()" style="height: 38px;"><img src="Images/logout.png" style="width: 20px; height: 20px;"></button>
             </div>
         </nav>
     </header>
@@ -75,14 +42,8 @@
         <button class="btn btn-outline-success" type="submit">Login</button>
     </form>
 
-    <!-- Output for search results -->
-    <table border="5" id="output" class="container mt-3">
-        <tr>
-            <th style="color: white">Keyword</th>
-            <th style="color: red">Title</th>
-            <th style="color: lime">Hashtag</th>
-        </tr>
-    </table>
+    <!-- Data Container -->
+    <div class="data-container" id="data-container"></div>
 
     <!--Scripts-->
     <script type="text/javascript" src="JS/Account/Login.js"></script>

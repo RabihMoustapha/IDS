@@ -1,7 +1,7 @@
 const email = document.getElementById("email");
 const password = document.getElementById("password");
 const query = document.getElementById("searchQuery");
-const table = document.getElementById("output");
+const container = document.getElementById("data-container");
 const profile = "http://localhost/IDS/Backend/profile.php";
 const searchbar = "http://localhost/IDS/Backend/searchbar.php";
 
@@ -45,37 +45,13 @@ function logout() {
     window.location.href = "Login.php";
 }
 
-async function getItem() {
-    const requestData = {
-        query: query.value,
-    };
-    try {
-        const response = await fetch(searchbar, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestData),
-        });
-        if (!response.ok) throw new Error("Search Failed");
-        const data = await response.json();
-        if (data.status === true) {
-            for (var i = 0; i < data.item.length; i++) {
-                output.innerHTML = `
-                                <tr>
-                                    <td style="color: white">${data.item[i].keyword}</td>
-                                    <td style="color: red">${data.item[i].title}</td>
-                                    <td style="color: lime">${data.item[i].hashtag}</td>
-                                </tr>`;
+var header = document.getElementsByTagName("header");
 
-            }
-        } else {
-            alert("Fatal error " + data.message);
-            query.value = "";
+for (let i = 0; i < header.length; i++) {
+    header[i].addEventListener("click", function () {
+        if (!isLoggedIn()) {
+            alert("Need to login");
+            window.location.href = "Login.php";
         }
-    } catch (err) {
-        console.error("An error:", err);
-        alert("An error occurred during fetching." + err);
-        query.value = "";
-    }
+    });
 }

@@ -10,6 +10,45 @@ body {
   color: white;
 }
 
+.data-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.data-block {
+  width: 250px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease-in-out;
+}
+
+.data-block:hover {
+  transform: scale(1.05);
+}
+
+.data-block img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.data-block h3 {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.data-block p {
+  margin: 5px 0;
+  color: #555;
+}
+
 .footer {
   margin-top: 380px;
   background-color: #333;
