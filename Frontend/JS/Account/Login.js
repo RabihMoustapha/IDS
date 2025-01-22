@@ -44,14 +44,3 @@ function logout() {
     localStorage.removeItem("userToken");
     window.location.href = "Login.php";
 }
-
-var header = document.getElementsByTagName("header");
-
-for (let i = 0; i < header.length; i++) {
-    header[i].addEventListener("click", function () {
-        if (!isLoggedIn()) {
-            alert("Need to login");
-            window.location.href = "Login.php";
-        }
-    });
-}

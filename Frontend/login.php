@@ -42,9 +42,6 @@
         <button class="btn btn-outline-success" type="submit">Login</button>
     </form>
 
-    <!-- Data Container -->
-    <div class="data-container" id="data-container"></div>
-
     <!--Scripts-->
     <script type="text/javascript" src="JS/Account/Login.js"></script>
 
