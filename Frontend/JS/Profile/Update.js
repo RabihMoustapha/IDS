@@ -24,9 +24,9 @@ async function Update() {
         });
         if (!response.ok) throw new Error("Update Failed");
         const data = await response.json();
-        if (data.status === true) {
+        if (data.success === true) {
             alert("Update successful");
-            window.location.href = "../../Home.php";
+            window.location.href = "../Frontend/Home.php";
         }
     } catch (err) {
         console.error("An error:", err);
@@ -36,5 +36,5 @@ async function Update() {
 
 function logout() {
     localStorage.removeItem("userToken");
-    window.location.href = "../../Login.php";
+    window.location.href = "../../Frontend/Login.php";
 }

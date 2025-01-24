@@ -61,9 +61,9 @@ function handlePut($pdo, $input)
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result) {
-        echo json_encode(['status' => true, 'message' => 'Profile updated successfully']);
+        echo json_encode(['success' => true, 'message' => 'Profile updated successfully']);
     } else {
-        echo json_encode(['status' => false, 'message' => 'Profile not found']);
+        echo json_encode(['success' => false, 'message' => 'Profile not found']);
     }
 }
 

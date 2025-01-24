@@ -24,11 +24,7 @@ async function Delete() {
         const data = await response.json();
         if (data.success === true) {
             alert("Delete successful");
-            window.location.href = "../../Login.php";
-        } else {
-            alert("Fatal error " + data.message);
-            email.value = "";
-            password.value = "";
+            window.location.href = "../../Frontend/Home.php";
         }
     } catch (err) {
         console.error("An error:", err);
