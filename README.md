@@ -7,41 +7,41 @@ responsive and engaging front end.
 
 # Core Features
 # User Registration and Authentication
-1) Sign Up/Login:Allow users to register, login, and manage their profiles.
-2) Roles and Permissions: Basic roles like "User" and "Admin" to help moderate the platform.
+- Sign Up/Login:Allow users to register, login, and manage their profiles.
+- Roles and Permissions: Basic roles like "User" and "Admin" to help moderate the platform.
 
 # Post Creation and Management
-1) Create Post: Users can submit new posts through a form with fields like title, description, tags, and an option to attach links or code snippets.
-2) Post Categories: Enable users to categorize their posts under tags (e.g., "Bug Fixes," "Best Practices," "New Ideas").
-2) Edit/Delete: Users can edit or delete their own posts.
+- Create Post: Users can submit new posts through a form with fields like title, description, tags, and an option to attach links or code snippets.
+- Post Categories: Enable users to categorize their posts under tags (e.g., "Bug Fixes," "Best Practices," "New Ideas").
+- Edit/Delete: Users can edit or delete their own posts.
 
 # User Interaction and Feedback
-1) Upvote/Downvote: Users can upvote or downvote posts, helping the most relevant or helpful posts rise to the top.
-2) Comments: Allow users to leave comments on posts for additional insights, questions, or discussions.
-3) Social Sharing: Provide options to share posts on social media platforms for greater reach.
+- Upvote/Downvote: Users can upvote or downvote posts, helping the most relevant or helpful posts rise to the top.
+- Comments: Allow users to leave comments on posts for additional insights, questions, or discussions.
+- Social Sharing: Provide options to share posts on social media platforms for greater reach.
 
 # Search and Filter Options
-1) Search Bar: Let users search posts by keywords, title, tags, or author.
-2) Filters: Filter posts by categories, popularity (e.g., most upvoted), or date.
+- Search Bar: Let users search posts by keywords, title, tags, or author.
+- Filters: Filter posts by categories, popularity (e.g., most upvoted), or date.
 
 # Profile Management
-1) User Dashboard: A profile section where users can view their posts, comment history, and upvote statistics.
-2) Points or Reputation System: Award points for posting, receiving upvotes, or commenting, with reputation levels to encourage engagement.
+- User Dashboard: A profile section where users can view their posts, comment history, and upvote statistics.
+- Points or Reputation System: Award points for posting, receiving upvotes, or commenting, with reputation levels to encourage engagement.
 
 # Notifications and Alerts
-1) Activity Notifications: Notify users when someone comments on or upvotes their post.
-2) Weekly Digest: Optional feature to send a weekly email summarizing popular posts or new ideas.
+- Activity Notifications: Notify users when someone comments on or upvotes their post.
+- Weekly Digest: Optional feature to send a weekly email summarizing popular posts or new ideas.
 
 # Advanced Features (Optional)
-1) Markdown Support: Allow users to format their posts using Markdown for code snippets, lists, etc.
-2) Tags and Mentions: Implement hashtags and user mentions (e.g., @username) to enhance community engagement.
-3) Content Moderation: An admin panel for reviewing flagged content and managing user-generated posts to maintain quality.
+- Markdown Support: Allow users to format their posts using Markdown for code snippets, lists, etc.
+- Tags and Mentions: Implement hashtags and user mentions (e.g., @username) to enhance community engagement.
+- Content Moderation: An admin panel for reviewing flagged content and managing user-generated posts to maintain quality.
 
 # Tech Stack
-1) Back-end: ASP.NET Core (for .NET) or PHP Laravel (for PHP) for handling user authentication, post management, and data persistence.
-2) Front-end: HTML, CSS, JavaScript, with React or Vue.js to create interactive, component-based UI for posting and filtering.
-3) Database: SQL Server (for .NET) or MySQL/PostgreSQL (for PHP) to store posts, comments, user profiles, and interaction data.
-4) Version Control: Git and GitHub for source control and collaboration.
+- Back-end: ASP.NET Core (for .NET) or PHP Laravel (for PHP) for handling user authentication, post management, and data persistence.
+- Front-end: HTML, CSS, JavaScript, with React or Vue.js to create interactive, component-based UI for posting and filtering.
+- Database: SQL Server (for .NET) or MySQL/PostgreSQL (for PHP) to store posts, comments, user profiles, and interaction data.
+- Version Control: Git and GitHub for source control and collaboration.
 
 # Project Milestones and Task Distribution
 Milestone 1: User Authentication and Profile Management (Week 1)
