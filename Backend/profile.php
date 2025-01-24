@@ -22,7 +22,6 @@ switch ($method) {
         break;
 }
 
-// Get request
 function handleGet($pdo)
 {
     $sql = 'SELECT * FROM profile';
@@ -36,7 +35,6 @@ function handleGet($pdo)
     }
 }
 
-// Post request
 function handlePost($pdo, $input)
 {
     $sql = 'SELECT * FROM profile WHERE email = :email and password = :password';
@@ -46,28 +44,40 @@ function handlePost($pdo, $input)
     $stmt->execute();
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
     if ($result) {
-        $token = bin2hex(random_bytes(16)); // Generate a simple token
+        $token = bin2hex(random_bytes(16));
         echo json_encode(['success' => true, 'message' => 'Login successful', 'token' => $token]);
     } else {
         echo json_encode(['success' => false, 'message' => 'Invalid email or password']);
     }
 }
 
-// Put request
 function handlePut($pdo, $input)
 {
-    $sql = 'UPDATE profile SET name = :name, email = :email, password = :password WHERE id = :id';
+    $sql = 'UPDATE profile SET name = :name, password = :password WHERE email = :email';
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $input['id'], 'email' => $input['email'], 'password' => $input['password'], 'name' => $input['name']]);
-    echo json_encode(['message' => 'Profile updated successfully']);
+    $stmt->bindParam(':name', $input['name']);
+    $stmt->bindParam(':email', $input['email']);
+    $stmt->bindParam(':password', $input['password']);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        echo json_encode(['status' => true, 'message' => 'Profile updated successfully']);
+    } else {
+        echo json_encode(['status' => false, 'message' => 'Profile not found']);
+    }
 }
 
-// Delete request
 function handleDelete($pdo, $input)
 {
-    $sql = 'DELETE FROM profile WHERE id = :id';
+    $sql = 'DELETE FROM profile WHERE email = :email and password = :password';
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $input['id']]);
-    echo json_encode(['message' => 'Profile deleted successfully']);
+    $stmt->bindParam(':email', $input['email']);
+    $stmt->bindParam(':password', $input['password']);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Profile deleted successfully']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Invalid email or password']);
+    }
 }
-?>
