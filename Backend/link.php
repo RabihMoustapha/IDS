@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: application/json");
+header('Content-Type: application/json');
 include 'db.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -25,7 +25,7 @@ switch ($method) {
 
 function handleGet($pdo)
 {
-    $sql = "SELECT * FROM link";
+    $sql = 'SELECT * FROM link';
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,7 +34,7 @@ function handleGet($pdo)
 
 function handlePost($pdo, $input)
 {
-    $sql = "INSERT INTO link (url) VALUES (:url)";
+    $sql = 'INSERT INTO link (url) VALUES (:url)';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['url'=>$input['url']]);
     echo json_encode(['message' => 'Link created successfully']);
@@ -42,7 +42,7 @@ function handlePost($pdo, $input)
 
 function handlePut($pdo, $input)
 {
-    $sql = "UPDATE link SET url = :url";
+    $sql = 'UPDATE link SET url = :url';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['url' => $input['url']]);
     echo json_encode(['message' => 'Link updated successfully']);
@@ -50,7 +50,7 @@ function handlePut($pdo, $input)
 
 function handleDelete($pdo, $input)
 {
-    $sql = "DELETE FROM link WHERE url = :url";
+    $sql = 'DELETE FROM link WHERE url = :url';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['url' => $input['url']]);
     echo json_encode(['message' => 'Link deleted successfully']);
