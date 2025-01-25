@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: application/json");
+header('Content-Type: application/json');
 include 'db.php';
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
@@ -24,7 +24,7 @@ switch ($method) {
 
 function handleGet($pdo)
 {
-    $sql = "SELECT * FROM post";
+    $sql = 'SELECT * FROM post';
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -33,7 +33,7 @@ function handleGet($pdo)
 
 function handlePost($pdo, $input)
 {
-    $sql = "INSERT INTO post (title, description, codesnippets) VALUES (:title, :description, :codesnippets)";
+    $sql = 'INSERT INTO post (title, description, codesnippets) VALUES (:title, :description, :codesnippets)';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['title' => $input['title'], 'description' => $input['description'], 'codesnippets' => $input['codesnippets']]);
     echo json_encode(['message' => 'Post created successfully']);
@@ -41,7 +41,7 @@ function handlePost($pdo, $input)
 
 function handlePut($pdo, $input)
 {
-    $sql = "UPDATE post SET codesnippets = :codesnippets, title = :title, description = :description WHERE id = :id";
+    $sql = 'UPDATE post SET codesnippets = :codesnippets, title = :title, description = :description WHERE id = :id';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['id' => $input['id'], 'title' => $input['title'], 'description' => $input['description'], 'codesnippets' => $input['codesnippets']]);
     echo json_encode(['message' => 'Post updated successfully']);
@@ -49,8 +49,16 @@ function handlePut($pdo, $input)
 
 function handleDelete($pdo, $input)
 {
-    $sql = "DELETE FROM post WHERE id = :id";
+    $sql = 'DELETE FROM post WHERE title = :title AND description = :description AND codesnippets = :codesnippets';
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $input['id']]);
-    echo json_encode(['message' => 'Post deleted successfully']);
+    $stmt->bindParam(':title', $input['title']);
+    $stmt->bindParam(':description', $input['description']);
+    $stmt->bindParam(':codesnippets', $input['codesnippets']);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Post deleted successful']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Post undeleted successful']);
+    }
 }

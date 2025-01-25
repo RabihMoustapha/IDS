@@ -22,7 +22,7 @@ async function getData() {
         });
         if (!response.ok) throw new Error("Search Failed");
         const data = await response.json();
-        if (data.status) {
+        if (data.success) {
             data.item.forEach(element => {
                 container.innerHTML = `<div class="data-block">
                                             <h3>${element.title}</h3>
@@ -46,7 +46,7 @@ async function seeItem() {
         const response = await fetch(post);
         if (!response.ok) throw new Error("Fetch Failed");
         const data = await response.json();
-        if (data.status) {
+        if (data.success) {
             for (var i = 0; i < data.length; i++) {
                 container.innerHTML += `<div class="data-block">
                                         <h3>${data.item[i].description}</h3>

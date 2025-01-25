@@ -34,9 +34,9 @@ function handlePost($pdo, $input)
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) {
-        echo json_encode(['status' => true, 'item' => $result]);
+        echo json_encode(['success' => true, 'item' => $result]);
     } else {
-        echo json_encode(['status' => false, 'message' => 'No data found']);
+        echo json_encode(['success' => false, 'message' => 'No data found']);
     }
 }
 
