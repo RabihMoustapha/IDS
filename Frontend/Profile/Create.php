@@ -56,24 +56,24 @@
         </nav>
     </header>
 
-    <form class="form-floating" action="javascript:void(0)" method="post" onsubmit="Create()">
-        <div class="form-floating mb-3">
-            <input autocomplete="email" type="email" class="form-control" id="email" name="email" placeholder="email@example.com" required>
-            <label for="email">Email address</label>
+    <form class='form-floating' action='javascript:void(0)' method='post' onsubmit='Create()'>
+        <div class='form-floating mb-3'>
+            <input autocomplete='email' type='email' class='form-control' id='email' name='email' placeholder='email@example.com' required>
+            <label for='email'>Email address</label>
         </div>
-        <div class="form-floating mb-3">
-            <input autocomplete="password" type="password" class="form-control" id="password" name="password" placeholder="password" required>
-            <label for="password">Password</label>
+        <div class='form-floating mb-3'>
+            <input autocomplete='password' type='password' class='form-control' id='password' name='password' placeholder='password' required>
+            <label for='password'>Password</label>
         </div>
-        <div class="form-floating mb-3">
-            <input autocomplete="name" type="text" class="form-control" id="name" name="name" placeholder="name" required>
-            <label for="name">Name</label>
+        <div class='form-floating mb-3'>
+            <input autocomplete='name' type='text' class='form-control' id='name' name='name' placeholder='name' required>
+            <label for='name'>Name</label>
         </div>
-        <button class="btn btn-outline-success" type="submit">Update</button>
+        <button class='btn btn-outline-success' type='submit'>Create</button>
     </form>
 
     <!--Scripts-->
-    <script type='text/javascript' src='../JS/Post/Create.js'></script>
+    <script type='text/javascript' src='../JS/Profile/Create.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
 
     <!-- Data Container -->
