@@ -29,9 +29,9 @@ function handleGet($pdo)
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) {
-        echo json_encode(array('status' => 'success', 'data' => $result));
+        echo json_encode(array('success' => true, 'data' => $result));
     } else {
-        echo json_encode(array('status' => 'error', 'message' => 'No data found.'));
+        echo json_encode(array('success' => false, 'message' => 'No data found.'));
     }
 }
 

@@ -28,23 +28,44 @@ function handleGet($pdo)
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($result);
+    if ($result) {
+        echo json_encode(['success' => true, 'data' => $result]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'No data found']);
+    }
 }
 
 function handlePost($pdo, $input)
 {
     $sql = 'INSERT INTO post (title, description, codesnippets) VALUES (:title, :description, :codesnippets)';
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['title' => $input['title'], 'description' => $input['description'], 'codesnippets' => $input['codesnippets']]);
-    echo json_encode(['message' => 'Post created successfully']);
+    $stmt->bindParam(':title', $input['title']);
+    $stmt->bindParam(':description', $input['description']);
+    $stmt->bindParam(':codesnippets', $input['codesnippets']);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Post created successful']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Post not created']);
+    }
 }
 
 function handlePut($pdo, $input)
 {
     $sql = 'UPDATE post SET codesnippets = :codesnippets, title = :title, description = :description WHERE id = :id';
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['id' => $input['id'], 'title' => $input['title'], 'description' => $input['description'], 'codesnippets' => $input['codesnippets']]);
-    echo json_encode(['message' => 'Post updated successfully']);
+    $stmt->bindParam(':id', $input['id']);
+    $stmt->bindParam(':title', $input['title']);
+    $stmt->bindParam(':description', $input['description']);
+    $stmt->bindParam(':codesnippets', $input['codesnippets']);
+    $stmt->execute();
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    if ($result) {
+        echo json_encode(['success' => true, 'message' => 'Post updated successful']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Post not updated']);
+    }
 }
 
 function handleDelete($pdo, $input)

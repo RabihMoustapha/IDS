@@ -13,14 +13,6 @@ switch ($method) {
         handleGet($pdo);
         break;
 
-    case 'PUT':
-        handlePut($pdo, $input);
-        break;
-
-    case 'DELETE':
-        handleDelete($pdo, $input);
-        break;
-
     default:
         echo json_encode(['error' => 'Unsupported request method']);
         break;
@@ -45,18 +37,10 @@ function handleGet($pdo)
     $query = 'SELECT * FROM searchbar';
     $stmt = $pdo->prepare($query);
     $stmt->execute();
-    $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    echo json_encode($results);
-}
-
-function handlePut($pdo, $input)
-{
-    // Add your PUT logic here
-    echo json_encode(['message' => 'PUT request received']);
-}
-
-function handleDelete($pdo, $input)
-{
-    // Add your DELETE logic here
-    echo json_encode(['message' => 'DELETE request received']);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if($result){
+        echo json_encode(['success' => true, 'item' => $result]);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'No data found']);
+    }
 }

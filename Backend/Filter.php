@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: application/json");
+header('Content-Type: application/json');
 include 'db.php';
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -25,7 +25,7 @@ switch ($method) {
 
 function handleGet($pdo)
 {
-    $sql = "SELECT * FROM filter";
+    $sql = 'SELECT * FROM filter';
     $stmt = $pdo->prepare($sql);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -34,7 +34,7 @@ function handleGet($pdo)
 
 function handlePost($pdo, $input)
 {
-    $sql = "INSERT INTO filter (popularity) VALUES (:popularity)";
+    $sql = 'INSERT INTO filter (popularity) VALUES (:popularity)';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['popularity' => $input['popularity']]);
     echo json_encode(['message' => 'Filter created successfully']);
@@ -42,7 +42,7 @@ function handlePost($pdo, $input)
 
 function handlePut($pdo, $input)
 {
-    $sql = "UPDATE filter SET popularity = :popularity WHERE id = :id";
+    $sql = 'UPDATE filter SET popularity = :popularity WHERE id = :id';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['popularity' => $input['popularity']]);
     echo json_encode(['message' => 'Filter updated successfully']);
@@ -50,7 +50,7 @@ function handlePut($pdo, $input)
 
 function handleDelete($pdo, $input)
 {
-    $sql = "DELETE FROM filter WHERE id = :id";
+    $sql = 'DELETE FROM filter WHERE id = :id';
     $stmt = $pdo->prepare($sql);
     $stmt->execute(['id' => $input['id']]);
     echo json_encode(['message' => 'Filter deleted successfully']);
