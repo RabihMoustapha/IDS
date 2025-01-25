@@ -1,6 +1,5 @@
 * {
     font-family: monospace;
-    color: white;
     font-weight: bold;
 }
 
@@ -8,53 +7,42 @@ body {
     background-size: cover;
     background-position: center;
     background: url("../Images/Background.jpeg");
+    color: white;
 }
 
-header table{
-    margin-left: 1090px;
-    display:flex;
+.footer {
+    margin-top: 380px;
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
 }
 
-.icons{
-    border-radius: 15px;
-    background: greenyellow;
-    width: 30px;
-    height: 15px;
-    padding: 5px;
-    margin: 5px;
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 90%;
 }
 
-.icons:hover {
-    border: none;
-    background: white;
-    font-size: 22px;
-    font-weight: bold;
-    position: center;
-    transition: 0.5s;
-    color: black;
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+.footer-links {
+    list-style-type: none;
+    margin: 0 10px;
+    padding: 0;
 }
 
-header input[type="text"]{
-    border-radius: 15px;
-    background: greenyellow;
-    border: none;
-    outline: none;
-    width: 100px;
-    height: 30px;
-    color: black;
-    font-size: 20px;
+.footer-links li {
+    display: inline;
+    margin-left: 20px;
 }
 
-header input[type="text"]:hover {
-    border: none;
-    background: white;
-    font-size: 22px;
-    font-weight: bold;
-    position: center;
-    transition: 0.5s;
-    color: black;
-    border-top-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+.footer-links a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
 }

@@ -27,7 +27,7 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="addpost.php" style="height: 38px;">
+                            <a class="nav-link active" aria-current="page" href="Post/Create.php" style="height: 38px;">
                                 <img src="Images/plus.png" style="width: 20px; height: 20px;">
                             </a>
                         </li>
