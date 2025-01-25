@@ -11,7 +11,7 @@
 
     <!--Bootstrap-->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
-    <link rel="icon" type="image/x-icon" href="Images/api.png">
+    <link rel="icon" type="image/x-icon" href="../Images/api.png">
 </head>
 
 <body>
@@ -43,8 +43,8 @@
                                 Dropdown
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="deletepost.php">Post</a></li>
-                                <li><a class="dropdown-item" href="deletehistory.php">History</a></li>
+                                <li><a class="dropdown-item" href="Delete.php">Post</a></li>
+                                <li><a class="dropdown-item" href="../Profile/Delete.php">Account</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>

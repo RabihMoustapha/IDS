@@ -28,8 +28,7 @@ switch ($method) {
 
 function handlePost($pdo, $input)
 {
-    // $search = '%' . $input['query'] . '%';
-    $query = 'SELECT * FROM searchbar WHERE keyword = :search';
+    $query = 'SELECT * FROM searchbar WHERE (keyword LIKE :search OR keyword = :search) AND (hashtag LIKE :search OR hashtag = :search) AND (title LIKE :search OR title = :search)';
     $stmt = $pdo->prepare($query);
     $stmt->bindParam(':search', $input['query']);
     $stmt->execute();

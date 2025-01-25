@@ -37,8 +37,8 @@
                                 <img src="../Images/delete.png" style="width: 20px; height: 20px;">
                             </a>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="Post/Delete.php">Post</a></li>
-                                <li><a class="dropdown-item" href="deletehistory.php">History</a></li>
+                            <li><a class="dropdown-item" href="Delete.php">Post</a></li>
+                            <li><a class="dropdown-item" href="../Profile/Delete.php">Account</a></li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
