@@ -15,37 +15,39 @@ switch ($method) {
 
 function handleCreate($pdo, $input)
 {
-    if (empty($input['email']) || empty($input['password']) || empty($input['name'])) {
-        echo json_encode(['success' => false, 'message' => 'All fields (email, password, name) are required.']);
+    if (empty($input['email']) || empty($input['title']) || empty($input['codesnippets']) || empty($input['content'])) {
+        echo json_encode(['success' => false, 'message' => 'All fields (email, title, codesnippets, content) are required.']);
         return;
     }
+
     $email = filter_var($input['email'], FILTER_SANITIZE_EMAIL);
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         echo json_encode(['success' => false, 'message' => 'Invalid email format.']);
         return;
     }
 
-    $checkEmailQuery = 'SELECT COUNT(*) FROM profile WHERE email = :email';
+    $checkEmailQuery = 'SELECT email FROM profile WHERE email = :email';
     $stmtCheck = $pdo->prepare($checkEmailQuery);
     $stmtCheck->bindParam(':email', $email);
     $stmtCheck->execute();
     $emailExists = $stmtCheck->fetchColumn();
 
-    if ($emailExists > 0) {
-        echo json_encode(['success' => false, 'message' => 'Email already exists.']);
+    if (!$emailExists) {
+        echo json_encode(['success' => false, 'message' => 'Email does not exist in profile.']);
         return;
     }
 
-    $sql = 'INSERT INTO profile (email, password, name) VALUES (:email, :password, :name)';
+    $sql = 'INSERT INTO post (email, title, codesnippets, content) VALUES (:email, :title, :codesnippets, :content)';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':password', $input['password']);
-    $stmt->bindParam(':name', $input['name']);
+    $stmt->bindParam(':title', $input['title']);
+    $stmt->bindParam(':codesnippets', $input['codesnippets']);
+    $stmt->bindParam(':content', $input['content']);
 
     if ($stmt->execute()) {
-        $token = bin2hex(random_bytes(16));
-        echo json_encode(['success' => true, 'message' => 'Account created successfully', 'token' => $token]);
+        echo json_encode(['success' => true, 'message' => 'Post created successfully']);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Account creation failed.']);
+        echo json_encode(['success' => false, 'message' => 'Post creation failed.']);
     }
 }
+?>
