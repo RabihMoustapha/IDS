@@ -24,9 +24,9 @@ async function Update() {
         });
         if (!response.ok) throw new Error('Update Failed');
         const data = await response.json();
-        if (data.success === true) {
+        if (data.success) {
             alert('Update successful');
-            window.location.href = '../Frontend/Home.php';
+            window.location.href = '../../Frontend/Home.php';
         }
     } catch (err) {
         console.error('An error:', err);

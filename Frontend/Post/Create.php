@@ -70,7 +70,7 @@
 
     <!--Adding labels-->
     <div class='container mt-5'>
-        <form class='row g-3 needs-validation' onsubmit='addPost(event)'>
+        <form class='row g-3 needs-validation' onsubmit='Create()'>
             <div class='mb-3'>
                 <label for='email' class='form-label'>Email address</label>
                 <input type='email' class='form-control' id='email' placeholder='name@example.com' required>
@@ -93,7 +93,7 @@
 
     <!--Scripts-->
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
-    <script type='text/javascript' src='../JS/Post/AddPost.js'></script>
+    <script type='text/javascript' src='../JS/Post/Create.js'></script>
 
     <!--Footer-->
     <footer class='footer'>

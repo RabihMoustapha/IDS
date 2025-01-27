@@ -32,7 +32,7 @@ function handleCreate($pdo, $input)
     $stmtCheck->execute();
     $emailExists = $stmtCheck->fetchColumn();
 
-    if (!$emailExists) {
+    if ($emailExists > 0) {
         echo json_encode(['success' => false, 'message' => 'Email does not exist in profile.']);
         return;
     }

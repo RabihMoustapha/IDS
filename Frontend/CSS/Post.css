@@ -1,13 +1,13 @@
 * {
     font-family: monospace;
     font-weight: bold;
+    color: white;
 }
 
 body {
     background-size: cover;
     background-position: center;
     background: url("../Images/Background.jpeg");
-    color: white;
 }
 
 .footer {
@@ -45,4 +45,9 @@ body {
 
 .footer-links a:hover {
     text-decoration: underline;
+}
+
+.form-text{
+    font-size: 20px;
+    color: white;
 }
