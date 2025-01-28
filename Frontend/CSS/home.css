@@ -32,17 +32,14 @@ table {
 .data-block {
   width: 350px;
   margin-bottom: 20px;
-}
-
-.data-block table {
-  width: 100%;
   border-radius: 10px;
   background-color: #333;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   transition: background-color 0.3s ease, transform 0.3s ease;
+  padding: 15px;
 }
 
-.data-block:hover table {
+.data-block:hover {
   transform: scale(1.02);
   background-color: #444;
 }
@@ -53,30 +50,30 @@ table {
   vertical-align: middle;
 }
 
-.data-block .header {
+.header {
   display: flex;
   align-items: center;
   gap: 10px;
 }
 
-.data-block .header img {
+.header img {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   object-fit: cover;
 }
 
-.data-block .header .user-info {
+.header .user-info {
   display: flex;
   flex-direction: column;
 }
 
-.data-block .header .user-info span {
+.header .user-info span {
   font-size: 14px;
   color: #ddd;
 }
 
-.data-block .header .user-info .username {
+.header .user-info .username {
   font-weight: bold;
   color: #fff;
 }
@@ -98,22 +95,26 @@ table {
   transform: scale(1.05);
 }
 
-.data-block .post-content {
+.post-content {
   margin-top: 15px;
   font-size: 14px;
   color: #ddd;
 }
 
-.data-block .actions {
+.post-details p {
+  margin: 5px 0;
+  color: #bbb;
+}
+
+.actions {
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
   font-size: 14px;
 }
 
-.data-block .actions .like-button,
-.data-block .actions .comment-button,
-.data-block .actions .share-button {
+.actions .like-button,
+.actions .comment-button {
   display: flex;
   align-items: center;
   gap: 5px;
@@ -121,9 +122,8 @@ table {
   color: #bbb;
 }
 
-.data-block .actions .like-button:hover,
-.data-block .actions .comment-button:hover,
-.data-block .actions .share-button:hover {
+.actions .like-button:hover,
+.actions .comment-button:hover {
   color: #fff;
 }
 

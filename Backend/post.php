@@ -37,17 +37,17 @@ function handleGet($pdo)
 
 function handlePost($pdo, $input)
 {
-    $sql = 'INSERT INTO post (title, description, codesnippets) VALUES (:title, :description, :codesnippets)';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':title', $input['title']);
-    $stmt->bindParam(':description', $input['description']);
-    $stmt->bindParam(':codesnippets', $input['codesnippets']);
+    $searchQuery = '%' . $input['query'] . '%';
+    $query = 'SELECT * FROM post WHERE keyword LIKE :search OR hashtag LIKE :search OR title LIKE :search OR codesnippets LIKE :search OR description LIKE :search';
+    $stmt = $pdo->prepare($query);
+    $stmt->bindParam(':search', $searchQuery);
     $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
     if ($result) {
-        echo json_encode(['success' => true, 'message' => 'Post created successful']);
+        echo json_encode(['success' => true, 'item' => $result]);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Post not created']);
+        echo json_encode(['success' => false, 'message' => 'No data found']);
     }
 }
 
@@ -83,3 +83,4 @@ function handleDelete($pdo, $input)
         echo json_encode(['success' => false, 'message' => 'Post undeleted successful']);
     }
 }
+?>

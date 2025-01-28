@@ -1,7 +1,6 @@
 const query = document.getElementById('searchQuery');
 const container = document.getElementById('data-container');
 const profile = 'http://localhost/IDS/Backend/profile.php';
-const searchbar = 'http://localhost/IDS/Backend/searchbar.php';
 const post = 'http://localhost/IDS/Backend/post.php';
 
 function isLoggedIn() {
@@ -13,7 +12,7 @@ async function getData() {
         query: query.value,
     };
     try {
-        const response = await fetch(searchbar, {
+        const response = await fetch(post, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -25,40 +24,29 @@ async function getData() {
         container.innerHTML = '';
         if (data.success) {
             data.item.forEach(element => {
-                container.innerHTML += `<tr class="data-block">
-    <td>
-      <table>
-        <tr class="header">
-          <td>
-          <img src= ${element.userImg} alt="User Profile" />
-          </td>
-          <td>
-            <div class="user-info">
-              <span class="username">${element.name}</span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" class="post-content">
-            This is an example post content. Here you can write about your thoughts, experiences, or anything else!
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <img src="${element.post - img}.jpg" alt="Post Image" />
-          </td>
-        </tr>
-        <tr class="actions">
-          <td class="like-button">
-            <span onclick='Like()'>👍</span> Like
-          </td>
-          <td class="comment-button">
-            <span onclick='Comment.js'>💬</span> Comment
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>`;
+                container.innerHTML += `<div class='data-block'>
+                    <div class='header'>
+                        <img src='../Images/${element.userImg}' alt='User Profile' />
+                        <div class='user-info'>
+                            <span class='username'>${element.name}</span>
+                        </div>
+                    </div>
+                    <div class='post-content'>
+                        ${element.content}
+                    </div>
+                    <img src='../Images/${element.postImg}.jpg' alt='Post Image' />
+                    <div class='post-details'>
+                        <p>${element.title}</p>
+                        <p>${element.description}</p>
+                        <p>${element.codesnippets}</p>
+                        <p>${element.hashtag}</p>
+                        <p>${element.keyword}</p>
+                    </div>
+                    <div class='actions'>
+                        <div class='like-button' onclick='Like()'>👍 Like</div>
+                        <div class='comment-button' onclick='Comment()'>💬 Comment</div>
+                    </div>
+                </div>`;
             });
         } else {
             alert('Fatal error ' + data.message);
@@ -78,40 +66,29 @@ async function seeItem() {
         container.innerHTML = '';
         if (data.success) {
             data.item.forEach(element => {
-                container.innerHTML += `<tr class="data-block">
-    <td>
-      <table>
-        <tr class="header">
-          <td>
-          <img src= ${element.userImg} alt="User Profile" />
-          </td>
-          <td>
-            <div class="user-info">
-              <span class="username">${element.name}</span>
-            </div>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" class="post-content">
-            This is an example post content. Here you can write about your thoughts, experiences, or anything else!
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <img src="${element.post - img}.jpg" alt="Post Image" />
-          </td>
-        </tr>
-        <tr class="actions">
-          <td class="like-button">
-            <span onclick='Like()'>👍</span> Like
-          </td>
-          <td class="comment-button">
-            <span onclick='Comment.js'>💬</span> Comment
-          </td>
-        </tr>
-      </table>
-    </td>
-  </tr>`;
+                container.innerHTML += `<div class='data-block'>
+                    <div class='header'>
+                        <img src='../Images/${element.userImg}' alt='User Profile' />
+                        <div class='user-info'>
+                            <span class='username'>${element.name}</span>
+                        </div>
+                    </div>
+                    <div class='post-content'>
+                        ${element.content}
+                    </div>
+                    <img src='../Images/${element.postImg}.jpg' alt='Post Image' />
+                    <div class='post-details'>
+                        <p>${element.title}</p>
+                        <p>${element.description}</p>
+                        <p>${element.codesnippets}</p>
+                        <p>${element.hashtag}</p>
+                        <p>${element.keyword}</p>
+                    </div>
+                    <div class='actions'>
+                        <div class='like-button' onclick='Like()'>👍 Like</div>
+                        <div class='comment-button' onclick='Comment()'>💬 Comment</div>
+                    </div>
+                </div>`;
             });
         }
     } catch (err) {

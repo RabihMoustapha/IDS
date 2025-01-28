@@ -1,5 +1,5 @@
 <?php
-if(isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && !empty($_GET['password']) && isset($_GET['email']) && !empty($_GET['email'])){
+if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && !empty($_GET['password']) && isset($_GET['email']) && !empty($_GET['email'])) {
     $name = $_GET['name'];
     echo "<div class='welcome-message'>Hello $name</div>";
 }
@@ -21,7 +21,7 @@ if(isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && !
 
 </head>
 
-<body>
+<body onload='seeItem()'>
     <header>
         <nav class='navbar navbar-expand-lg bg-body-tertiary'>
             <div class='container-fluid'>
@@ -62,9 +62,10 @@ if(isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && !
         </nav>
     </header>
 
-    <!-- Data Container -->
-    <table class="data-container">
-    </table>
+    <!--Container -->
+    <div class='data-container'>
+    </div>
+
     <!--Footer-->
     <footer class='footer'>
         <div class='footer-container'>
