@@ -22,9 +22,10 @@ async function getData() {
         });
         if (!response.ok) throw new Error('Search Failed');
         const data = await response.json();
+        container.innerHTML = '';
         if (data.success) {
             data.item.forEach(element => {
-                container.innerHTML = `<div class='data-block'>
+                container.innerHTML += `<div class='data-block'>
                                             <h3>${element.title}</h3>
                                             <p>${element.hashtag}</p>
                                             <p>${element.keyword}</p>
@@ -35,7 +36,6 @@ async function getData() {
             query.value = '';
         }
     } catch (err) {
-        console.error('An error:', err);
         alert('An error occurred during fetching.' + err);
         query.value = '';
     }
@@ -46,17 +46,17 @@ async function seeItem() {
         const response = await fetch(post);
         if (!response.ok) throw new Error('Fetch Failed');
         const data = await response.json();
+        container.innerHTML = '';
         if (data.success) {
-            for (var i = 0; i < data.length; i++) {
+            data.item.forEach(item => {
                 container.innerHTML += `<div class='data-block'>
-                                        <h3>${data.item[i].description}</h3>
-                                        <p>${data.item[i].title}</p>
-                                        <p>${data.item[i].codesnippets}</p>
+                                        <h3>${item.description}</h3>
+                                        <p>${item.title}</p>
+                                        <p>${item.codesnippets}</p>
                                     </div>`;
-            };
+            });
         }
     } catch (err) {
-        console.error('An error:', err);
         alert('An error occurred during fetching.' + err);
     }
 }
