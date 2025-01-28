@@ -56,17 +56,8 @@
         </nav>
     </header>
 
-    <!--Scripts-->
-    <script type='text/javascript' src='JS/Home.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
-
     <!-- Data Container -->
     <div class='data-container' id='data-container'>
-        <div data-block>
-            <h3>Post Title</h3>
-            <p>Post Content</p>
-            <p>Post Hashtag</p>
-        </div>
     </div>
 
     <!--Footer-->
@@ -80,6 +71,11 @@
             </ul>
         </div>
     </footer>
+
+    <!--Scripts-->
+    <script type='text/javascript' src='JS/Home.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
+
 </body>
 
 </html>
