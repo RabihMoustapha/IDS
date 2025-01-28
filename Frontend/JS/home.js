@@ -100,3 +100,30 @@ function logout() {
     localStorage.removeItem('userToken');
     window.location.href = 'Login.php';
 }
+
+async function Delete() {
+    const email = prompt('Enter your email');
+    const password = prompt('Enter your password');
+    const requestData = {
+        email: email,
+        password: password,
+    };
+    try {
+        const response = await fetch(profile, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestData),
+        });
+        if (!response.ok) throw new Error('Delete Failed');
+        const data = await response.json();
+        if (data.success) {
+            alert('Profile Deleted Successfully');
+        } else {
+            alert('Fatal error ' + data.message);
+        }
+    } catch (err) {
+        alert('An error occurred during fetching.' + err);
+    }
+}

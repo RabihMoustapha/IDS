@@ -1,6 +1,5 @@
 const email = document.getElementById('email');
 const password = document.getElementById('password');
-const query = document.getElementById('searchQuery');
 const container = document.getElementById('data-container');
 const profile = 'http://localhost/IDS/Backend/profile.php';
 const searchbar = 'http://localhost/IDS/Backend/searchbar.php';
@@ -26,7 +25,7 @@ async function login() {
         const data = await response.json();
         if (data.success) {
             localStorage.setItem('userToken', data.token);
-            window.location.href = `Home.php?email=${email.value}&password=${password.value}`;
+            window.location.href = `Frontend/Home.php`;
         } else {
             alert('Login failed: ' + data.message);
             email.value = '';

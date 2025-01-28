@@ -37,26 +37,13 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
                                 <img src='Images/plus.png' style='width: 20px; height: 20px;'>
                             </a>
                         </li>
-                        <li class='nav-item dropdown'>
-                            <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown'
-                                aria-expanded='false'>
-                                <img src='Images/delete.png' style='width: 20px; height: 20px;'>
-                            </a>
-                            <ul class='dropdown-menu'>
-                                <li><a class='dropdown-item' href='Post/Delete.php'>Post</a></li>
-                                <li><a class='dropdown-item' href='Profile/Delete.php'>Account</a></li>
-                                <li>
-                                    <hr class='dropdown-divider'>
-                                </li>
-                                <li><a class='dropdown-item' href='deleteothers.php'>Others</a></li>
-                            </ul>
-                        </li>
                     </ul>
                     <form class='d-flex' role='search' action='javascript:void(0)' method='post' onsubmit='getData()' style='flex-grow: 1; margin-right: 10px;'>
                         <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' id='searchQuery'>
                         <button class='btn btn-outline-success' style='height: 38px;' type='submit'><img src='Images/search.png' style='height: 20px; width: 20px'></button>
                     </form>
                     <button class='btn btn-outline-danger' type='button' onclick='logout()' style='height: 38px;'><img src='Images/logout.png' style='width: 20px; height: 20px;'></button>
+                    <button class='btn btn-outline-danger' type='button' onclick='Delete()' style='height: 38px;'><img src='Images/delete.png' style='width: 20px; height: 20px;'></button>
                 </div>
             </div>
         </nav>

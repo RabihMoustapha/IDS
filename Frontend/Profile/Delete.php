@@ -1,87 +1,40 @@
-<!DOCTYPE html>
-<html lang='en'>
+<?php
+header('Content-Type: application/json');
+include '../../Backend/db.php';
 
-<head>
-    <meta charset='UTF-8'>
-    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <title>Delete</title>
+$method = $_SERVER['REQUEST_METHOD'];
+$input = json_decode(file_get_contents('php://input'), true);
 
-    <!--CSS-->
-    <link type='text/css' href='../CSS/Profile.css' rel='stylesheet'>
+switch ($method) {
+    case 'DELETE':
+        handleDelete($pdo, $input);
+        break;
+    default:
+        echo json_encode(['message' => 'Invalid request method']);
+        break;
+}
 
-    <!--Bootstrap-->
-    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'>
-    <link rel='icon' type='image/x-icon' href='../Images/api.png'>
+function handleDelete($pdo, $input)
+{
+    if (empty($input['email'])) {
+        echo json_encode(['success' => false, 'message' => 'Email is required.']);
+        return;
+    }
 
-</head>
+    $email = filter_var($input['email'], FILTER_SANITIZE_EMAIL);
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo json_encode(['success' => false, 'message' => 'Invalid email format.']);
+        return;
+    }
 
-<body>
-    <header>
-        <nav class='navbar navbar-expand-lg bg-body-tertiary'>
-            <div class='container-fluid'>
-                <button class='navbar-toggler' type='button' data-bs-toggle='collapse'
-                    data-bs-target='#navbarSupportedContent' aria-controls='navbarSupportedContent'
-                    aria-expanded='false' aria-label='Toggle navigation'>
-                    <span class='navbar-toggler-icon'></span>
-                </button>
-                <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-                    <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
-                        <li class='nav-item'>
-                            <a class='nav-link active' aria-current='page' href='addpost.php' style='height: 38px;'>
-                                <img src='../Images/plus.png' style='width: 20px; height: 20px;'>
-                            </a>
-                        </li>
-                        <li class='nav-item dropdown'>
-                            <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown'
-                                aria-expanded='false'>
-                                <img src='../Images/delete.png' style='width: 20px; height: 20px;'>
-                            </a>
-                            <ul class='dropdown-menu'>
-                                <li><a class='dropdown-item' href='Delete.php'>Post</a></li>
-                                <li><a class='dropdown-item' href='../Profile/Delete.php'>Account</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                    <form class='d-flex' role='search' action='javascript:void(0)' method='post' onsubmit='getData()' style='flex-grow: 1; margin-right: 10px;'>
-                        <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' id='searchQuery'>
-                        <button class='btn btn-outline-success' style='height: 38px;' type='submit'><img src='../Images/search.png' style='height: 20px; width: 20px'></button>
-                    </form>
-                    <button class='btn btn-outline-danger' type='button' onclick='logout()' style='height: 38px;'><img src='../Images/logout.png' style='width: 20px; height: 20px;'></button>
-                </div>
-            </div>
-        </nav>
-    </header>
+    $sql = 'DELETE FROM profile WHERE email = :email';
+    $stmt = $pdo->prepare($sql);
+    $stmt->bindParam(':email', $email);
 
-    <form class='form-floating' action='javascript:void(0)' method='put' onsubmit='Delete()'>
-        <div class='form-floating mb-3'>
-            <input autocomplete='email' type='email' class='form-control' id='email' name='email' placeholder='email@example.com' required>
-            <label for='email'>Email address</label>
-        </div>
-        <div class='form-floating mb-3'>
-            <input autocomplete='password' type='password' class='form-control' id='password' name='password' placeholder='password' required>
-            <label for='password'>Password</label>
-        </div>
-        <button class='btn btn-outline-success' type='submit'>Delete</button>
-    </form>
-
-    <!--Scripts-->
-    <script type='text/javascript' src='../JS/Profile/Delete.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
-
-    <!-- Data Container -->
-    <div class='data-container' id='data-container'></div>
-
-    <!--Footer-->
-    <footer class='footer'>
-        <div class='footer-container'>
-            <p>WebApi. All rights reserved.</p>
-            <ul class='footer-links'>
-                <li><a href='tel:+961818140764'>Phone Number</a></li>
-                <li><a href='mailto:mostapharabih59@gmail.com'>Email</a></li>
-                <li><a href='https://github.com/RabihMoustapha'>GitHub</a></li>
-            </ul>
-        </div>
-    </footer>
-</body>
-
-</html>
+    if ($stmt->execute()) {
+        echo json_encode(['success' => true, 'message' => 'Profile deleted successfully']);
+    } else {
+        echo json_encode(['success' => false, 'message' => 'Profile deletion failed']);
+    }
+}
+?>

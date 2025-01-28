@@ -69,7 +69,7 @@ function handlePut($pdo, $input)
 
 function handleDelete($pdo, $input)
 {
-    $sql = 'DELETE FROM profile WHERE email = :email and password = :password';
+    $sql = 'DELETE FROM profile WHERE email = :email AND password = :password';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':email', $input['email']);
     $stmt->bindParam(':password', $input['password']);
