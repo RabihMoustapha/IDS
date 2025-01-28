@@ -22,14 +22,43 @@ async function getData() {
         });
         if (!response.ok) throw new Error('Search Failed');
         const data = await response.json();
-        container.innerHTML = '';
+        // container.innerHTML = '';
         if (data.success) {
             data.item.forEach(element => {
-                container.innerHTML += `<div class='data-block'>
-                                            <h3>${element.title}</h3>
-                                            <p>${element.hashtag}</p>
-                                            <p>${element.keyword}</p>
-                                        </div>`;
+                container.innerHTML += `<tr class="data-block">
+    <td>
+      <table>
+        <tr class="header">
+          <td>
+          <img src= ${element.user - img} alt="User Profile" />
+          </td>
+          <td>
+            <div class="user-info">
+              <span class="username">${element.name}</span>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" class="post-content">
+            This is an example post content. Here you can write about your thoughts, experiences, or anything else!
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2">
+            <img src="${element.post - img}.jpg" alt="Post Image" />
+          </td>
+        </tr>
+        <tr class="actions">
+          <td class="like-button">
+            <span onclick='Like()'>👍</span> Like
+          </td>
+          <td class="comment-button">
+            <span onclick='Comment.js'>💬</span> Comment
+          </td>
+        </tr>
+      </table>
+    </td>
+  </tr>`;
             });
         } else {
             alert('Fatal error ' + data.message);

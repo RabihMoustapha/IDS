@@ -7,7 +7,7 @@
     <title>Home</title>
 
     <!--CSS-->
-    <link type='text/css' href='CSS/Home.css' rel='stylesheet'>
+    <link type='text/css' rel='stylesheet' href='CSS/Home.css'>
 
     <!--Bootstrap-->
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css'>
@@ -15,7 +15,7 @@
 
 </head>
 
-<body onload='seeItem()'>
+<body>
     <header>
         <nav class='navbar navbar-expand-lg bg-body-tertiary'>
             <div class='container-fluid'>
@@ -57,9 +57,8 @@
     </header>
 
     <!-- Data Container -->
-    <div class='data-container' id='data-container'>
-    </div>
-
+    <table class="data-container">
+    </table>
     <!--Footer-->
     <footer class='footer'>
         <div class='footer-container'>

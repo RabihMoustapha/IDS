@@ -1,14 +1,27 @@
 * {
   font-family: monospace;
   font-weight: bold;
-  color: #333;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
   background-size: cover;
   background-position: center;
   background: url("../Images/Background.jpeg");
-  color: #333;
+  background-color: #121212;
+  /* Dark background color */
+  color: #fff;
+  /* Default text color */
+  transition: background-color 0.3s ease-in-out;
+  /* Smooth transition for background */
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .data-container {
@@ -16,49 +29,133 @@ body {
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  color: #fff;
 }
 
 .data-block {
-  width: 250px;
-  padding: 15px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  text-align: center;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
-  transition: transform 0.3s ease-in-out;
-  color: #333;
+  width: 350px;
+  /* Wider for a more typical post layout */
+  margin-bottom: 20px;
 }
 
-.data-block:hover {
-  transform: scale(1.05);
+.data-block table {
+  width: 100%;
+  border-radius: 10px;
+  /* Rounded corners */
+  background-color: #333;
+  /* Dark background */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  /* Subtle shadow for depth */
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  /* Smooth hover effect */
+}
+
+.data-block:hover table {
+  transform: scale(1.02);
+  /* Slight scale on hover */
+  background-color: #444;
+  /* Lighter background on hover */
+}
+
+.data-block td,
+.data-block th {
+  padding: 10px;
+  vertical-align: middle;
+}
+
+.data-block .header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.data-block .header img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  /* Circular profile picture */
+  object-fit: cover;
+}
+
+.data-block .header .user-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.data-block .header .user-info span {
+  font-size: 14px;
+  color: #ddd;
+  /* Light gray text for user info */
+}
+
+.data-block .header .user-info .username {
+  font-weight: bold;
+  color: #fff;
+}
+
+.data-block .post-time {
+  font-size: 12px;
+  color: #888;
+  /* Lighter text for the post time */
 }
 
 .data-block img {
   width: 100%;
   height: auto;
   border-radius: 8px;
-}
-
-.data-block h3 {
   margin-top: 15px;
-  font-size: 18px;
-  font-weight: bold;
+  transition: transform 0.3s ease;
+  /* Smooth image scaling */
 }
 
-.data-block p {
-  margin: 5px 0;
-  color: #666;
+.data-block img:hover {
+  transform: scale(1.05);
+  /* Zoom in on hover */
+}
+
+.data-block .post-content {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #ddd;
+  /* Light gray text */
+}
+
+.data-block .actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.data-block .actions .like-button,
+.data-block .actions .comment-button,
+.data-block .actions .share-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+  color: #bbb;
+  /* Light gray for buttons */
+}
+
+.data-block .actions .like-button:hover,
+.data-block .actions .comment-button:hover,
+.data-block .actions .share-button:hover {
+  color: #fff;
+  /* White on hover */
 }
 
 .footer {
   margin-top: 380px;
-  background-color: #f9f9f9;
-  color: #333;
+  background-color: #1e1e1e;
+  /* Dark footer background */
+  color: #fff;
+  /* Light text color */
   padding: 30px 0;
-  margin-top: 470px;
   text-align: center;
   width: 100%;
+  transition: background-color 0.3s ease-in-out;
+  /* Smooth transition for footer */
 }
 
 .footer-container {
@@ -82,11 +179,18 @@ body {
 }
 
 .footer-links a {
-  color: #333;
+  color: #ddd;
+  /* Light gray for links */
   text-decoration: none;
   font-size: 14px;
+  transition: color 0.3s ease, transform 0.3s ease;
+  /* Smooth color and transform on hover */
 }
 
 .footer-links a:hover {
   text-decoration: underline;
+  color: #fff;
+  /* Hover color change for better visibility */
+  transform: translateY(-2px);
+  /* Slight upward movement on hover */
 }
