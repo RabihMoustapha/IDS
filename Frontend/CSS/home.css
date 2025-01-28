@@ -10,13 +10,10 @@
 body {
   background-size: cover;
   background-position: center;
-  background: url("../Images/Background.jpeg");
+  background: url('../Images/Background.jpeg');
   background-color: #121212;
-  /* Dark background color */
   color: #fff;
-  /* Default text color */
   transition: background-color 0.3s ease-in-out;
-  /* Smooth transition for background */
 }
 
 table {
@@ -34,27 +31,20 @@ table {
 
 .data-block {
   width: 350px;
-  /* Wider for a more typical post layout */
   margin-bottom: 20px;
 }
 
 .data-block table {
   width: 100%;
   border-radius: 10px;
-  /* Rounded corners */
   background-color: #333;
-  /* Dark background */
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  /* Subtle shadow for depth */
   transition: background-color 0.3s ease, transform 0.3s ease;
-  /* Smooth hover effect */
 }
 
 .data-block:hover table {
   transform: scale(1.02);
-  /* Slight scale on hover */
   background-color: #444;
-  /* Lighter background on hover */
 }
 
 .data-block td,
@@ -73,7 +63,6 @@ table {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  /* Circular profile picture */
   object-fit: cover;
 }
 
@@ -85,7 +74,6 @@ table {
 .data-block .header .user-info span {
   font-size: 14px;
   color: #ddd;
-  /* Light gray text for user info */
 }
 
 .data-block .header .user-info .username {
@@ -96,7 +84,6 @@ table {
 .data-block .post-time {
   font-size: 12px;
   color: #888;
-  /* Lighter text for the post time */
 }
 
 .data-block img {
@@ -105,19 +92,16 @@ table {
   border-radius: 8px;
   margin-top: 15px;
   transition: transform 0.3s ease;
-  /* Smooth image scaling */
 }
 
 .data-block img:hover {
   transform: scale(1.05);
-  /* Zoom in on hover */
 }
 
 .data-block .post-content {
   margin-top: 15px;
   font-size: 14px;
   color: #ddd;
-  /* Light gray text */
 }
 
 .data-block .actions {
@@ -135,27 +119,22 @@ table {
   gap: 5px;
   cursor: pointer;
   color: #bbb;
-  /* Light gray for buttons */
 }
 
 .data-block .actions .like-button:hover,
 .data-block .actions .comment-button:hover,
 .data-block .actions .share-button:hover {
   color: #fff;
-  /* White on hover */
 }
 
 .footer {
   margin-top: 380px;
   background-color: #1e1e1e;
-  /* Dark footer background */
   color: #fff;
-  /* Light text color */
   padding: 30px 0;
   text-align: center;
   width: 100%;
   transition: background-color 0.3s ease-in-out;
-  /* Smooth transition for footer */
 }
 
 .footer-container {
@@ -180,17 +159,25 @@ table {
 
 .footer-links a {
   color: #ddd;
-  /* Light gray for links */
   text-decoration: none;
   font-size: 14px;
   transition: color 0.3s ease, transform 0.3s ease;
-  /* Smooth color and transform on hover */
 }
 
 .footer-links a:hover {
   text-decoration: underline;
   color: #fff;
-  /* Hover color change for better visibility */
   transform: translateY(-2px);
-  /* Slight upward movement on hover */
+}
+
+.welcome-message {
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #fff;
+  background-color: #444;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(176, 176, 176, 0.2);
 }

@@ -24,7 +24,7 @@ async function Create() {
         const data = await response.json();
         if (data.success) {
             alert('Account created successfully');
-            window.location.href = '../../Frontend/Home.php';
+            window.location.href = `../../Frontend/Home.php?name=${name.value}&email=${email.value}&password=${password.value}`;
         } else {
             alert('Account creation failed. Please try again.');
             email.value = '';

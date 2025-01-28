@@ -1,3 +1,9 @@
+<?php
+if(isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && !empty($_GET['password']) && isset($_GET['email']) && !empty($_GET['email'])){
+    $name = $_GET['name'];
+    echo "<div class='welcome-message'>Hello $name</div>";
+}
+?>
 <!DOCTYPE html>
 <html lang='en'>
 

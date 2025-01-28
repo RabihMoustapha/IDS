@@ -26,7 +26,7 @@ async function login() {
         const data = await response.json();
         if (data.success) {
             localStorage.setItem('userToken', data.token);
-            window.location.href = 'Home.php';
+            window.location.href = `Home.php?email=${email.value}&password=${password.value}`;
         } else {
             alert('Login failed: ' + data.message);
             email.value = '';
