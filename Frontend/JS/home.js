@@ -47,13 +47,19 @@ async function getData() {
 
 async function seeItem() {
     try {
-        const response = await fetch(post);
+        const response = await fetch(post, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(),
+        });
         if (!response.ok) throw new Error('Fetch Failed');
         const data = await response.json();
-        container.innerHTML = '';
         if (data.success) {
             data.item.forEach(element => {
-                container.innerHTML += `<div class='data-block'>
+                container.innerHTML += `
+                <div class='data-block'>
                     <div class='post-details'>
                         <p>${element.title}</p>
                         <p>${element.description}</p>
@@ -62,8 +68,11 @@ async function seeItem() {
                         <div class='like-button' onclick='Like()'>👍 Like</div>
                         <div class='comment-button' onclick='Comment()'>💬 Comment</div>
                     </div>
-                </div>`;
+                </div>
+                `;
             });
+        } else {
+            alert('Fatal error ' + data.message);
         }
     } catch (err) {
         alert('An error occurred during fetching.' + err);

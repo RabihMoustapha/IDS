@@ -29,7 +29,7 @@ function handleGet($pdo)
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
     if ($result) {
-        echo json_encode(['success' => true, 'data' => $result]);
+        echo json_encode(['success' => true, 'item' => $result]);
     } else {
         echo json_encode(['success' => false, 'message' => 'No data found']);
     }
