@@ -43,7 +43,6 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
                         <button class='btn btn-outline-success' style='height: 38px;' type='submit'><img src='Images/search.png' style='height: 20px; width: 20px'></button>
                     </form>
                     <button class='btn btn-outline-danger' type='button' onclick='logout()' style='height: 38px;'><img src='Images/logout.png' style='width: 20px; height: 20px;'></button>
-                    <button class='btn btn-outline-danger' type='button' onclick='Delete()' style='height: 38px;'><img src='Images/delete.png' style='width: 20px; height: 20px;'></button>
                 </div>
             </div>
         </nav>

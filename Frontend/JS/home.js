@@ -9,7 +9,7 @@ function isLoggedIn() {
 
 async function getData() {
     const requestData = {
-        query: query.value,
+        description: query.value,
     };
     try {
         const response = await fetch(post, {
@@ -21,23 +21,17 @@ async function getData() {
         });
         if (!response.ok) throw new Error('Search Failed');
         const data = await response.json();
-        container.innerHTML = '';
         if (data.success) {
             data.item.forEach(element => {
-                container.innerHTML += `<div class='data-block'>
-                    <div class='post-content'>
-                        ${element.content}
-                    </div>
+                container.innerHTML = `<div class='data-block'>
                     <div class='post-details'>
                         <p>${element.title}</p>
                         <p>${element.description}</p>
-                        <p>${element.codesnippets}</p>
-                        <p>${element.hashtag}</p>
-                        <p>${element.keyword}</p>
                     </div>
                     <div class='actions'>
                         <div class='like-button' onclick='Like()'>👍 Like</div>
                         <div class='comment-button' onclick='Comment()'>💬 Comment</div>
+                        <button class='btn btn-outline-danger' type='button' onclick='Delete()' style='height: 38px;'><img src='Images/delete.png' style='width: 20px; height: 20px;'></button>
                     </div>
                 </div>`;
             });
@@ -60,15 +54,9 @@ async function seeItem() {
         if (data.success) {
             data.item.forEach(element => {
                 container.innerHTML += `<div class='data-block'>
-                    <div class='post-content'>
-                        ${element.content}
-                    </div>
                     <div class='post-details'>
                         <p>${element.title}</p>
                         <p>${element.description}</p>
-                        <p>${element.codesnippets}</p>
-                        <p>${element.hashtag}</p>
-                        <p>${element.keyword}</p>
                     </div>
                     <div class='actions'>
                         <div class='like-button' onclick='Like()'>👍 Like</div>

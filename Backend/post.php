@@ -37,10 +37,9 @@ function handleGet($pdo)
 
 function handlePost($pdo, $input)
 {
-    $searchQuery = '%' . $input['query'] . '%';
-    $query = 'SELECT * FROM post WHERE keyword LIKE :search OR hashtag LIKE :search OR title LIKE :search OR codesnippets LIKE :search OR description LIKE :search';
+    $query = 'SELECT * FROM post WHERE description LIKE :search';
     $stmt = $pdo->prepare($query);
-    $stmt->bindParam(':search', $searchQuery);
+    $stmt->bindParam(':search', $input['query']);
     $stmt->execute();
     $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -53,16 +52,14 @@ function handlePost($pdo, $input)
 
 function handlePut($pdo, $input)
 {
-    $sql = 'UPDATE post SET codesnippets = :codesnippets, title = :title, description = :description WHERE id = :id';
+    $sql = 'UPDATE post SET title = :title, description = :description WHERE id = :id';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':id', $input['id']);
     $stmt->bindParam(':title', $input['title']);
     $stmt->bindParam(':description', $input['description']);
-    $stmt->bindParam(':codesnippets', $input['codesnippets']);
     $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($result) {
-        echo json_encode(['success' => true, 'message' => 'Post updated successful']);
+    if ($stmt->rowCount() > 0) {
+        echo json_encode(['success' => true, 'message' => 'Post updated successfully']);
     } else {
         echo json_encode(['success' => false, 'message' => 'Post not updated']);
     }
@@ -70,17 +67,14 @@ function handlePut($pdo, $input)
 
 function handleDelete($pdo, $input)
 {
-    $sql = 'DELETE FROM post WHERE title = :title AND description = :description AND codesnippets = :codesnippets';
+    $sql = 'DELETE FROM post WHERE title = :title AND description = :description';
     $stmt = $pdo->prepare($sql);
     $stmt->bindParam(':title', $input['title']);
     $stmt->bindParam(':description', $input['description']);
-    $stmt->bindParam(':codesnippets', $input['codesnippets']);
     $stmt->execute();
-    $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($result) {
-        echo json_encode(['success' => true, 'message' => 'Post deleted successful']);
+    if ($stmt->rowCount() > 0) {
+        echo json_encode(['success' => true, 'message' => 'Post deleted successfully']);
     } else {
-        echo json_encode(['success' => false, 'message' => 'Post undeleted successful']);
+        echo json_encode(['success' => false, 'message' => 'Post not deleted']);
     }
 }
-?>
