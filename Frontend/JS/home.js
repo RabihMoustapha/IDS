@@ -47,13 +47,7 @@ async function getData() {
 
 async function seeItem() {
     try {
-        const response = await fetch(post, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(),
-        });
+        const response = await fetch(post);
         if (!response.ok) throw new Error('Fetch Failed');
         const data = await response.json();
         if (data.success) {
