@@ -129,12 +129,11 @@ table {
 
 .footer {
   margin-top: 380px;
-  background-color: #1e1e1e;
-  color: #fff;
-  padding: 30px 0;
+  background-color: #333;
+  color: white;
+  padding: 20px 0;
   text-align: center;
   width: 100%;
-  transition: background-color 0.3s ease-in-out;
 }
 
 .footer-container {
@@ -158,16 +157,13 @@ table {
 }
 
 .footer-links a {
-  color: #ddd;
+  color: white;
   text-decoration: none;
   font-size: 14px;
-  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .footer-links a:hover {
   text-decoration: underline;
-  color: #fff;
-  transform: translateY(-2px);
 }
 
 .welcome-message {

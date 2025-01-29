@@ -25,16 +25,9 @@ async function getData() {
         if (data.success) {
             data.item.forEach(element => {
                 container.innerHTML += `<div class='data-block'>
-                    <div class='header'>
-                        <img src='../Images/${element.userImg}' alt='User Profile' />
-                        <div class='user-info'>
-                            <span class='username'>${element.name}</span>
-                        </div>
-                    </div>
                     <div class='post-content'>
                         ${element.content}
                     </div>
-                    <img src='../Images/${element.postImg}.jpg' alt='Post Image' />
                     <div class='post-details'>
                         <p>${element.title}</p>
                         <p>${element.description}</p>
@@ -67,16 +60,9 @@ async function seeItem() {
         if (data.success) {
             data.item.forEach(element => {
                 container.innerHTML += `<div class='data-block'>
-                    <div class='header'>
-                        <img src='../Images/${element.userImg}' alt='User Profile' />
-                        <div class='user-info'>
-                            <span class='username'>${element.name}</span>
-                        </div>
-                    </div>
                     <div class='post-content'>
                         ${element.content}
                     </div>
-                    <img src='../Images/${element.postImg}.jpg' alt='Post Image' />
                     <div class='post-details'>
                         <p>${element.title}</p>
                         <p>${element.description}</p>
