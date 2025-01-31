@@ -1,12 +1,11 @@
-const post = 'http://localhost/IDS/Backend/Create/post.php';
+const post = 'http://localhost/IDS/Backend/Delete/post.php';
 const email = document.getElementById('email');
 const title = document.getElementById('title');
-const codesnippets = document.getElementById('codesnippets');
-const content = document.getElementById('content');
+const description = document.getElementById('description');
 
-async function Create() {
+async function Delete() {
     const requestData = {
-        codesnippets: codesnippets.value,
+        description: description.value,
         email: email.value,
         title: title.value,
         content: content.value,
@@ -14,7 +13,7 @@ async function Create() {
 
     try {
         const response = await fetch(post, {
-            method: 'POST',
+            method: 'delete',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -31,15 +30,13 @@ async function Create() {
             alert('Post creation failed. Please try again.');
             email.value = '';
             title.value = '';
-            codesnippets.value = '';
-            content.value = '';
+            description.value = '';
         }
     } catch (err) {
         console.error('An error occurred:', err);
         alert(`An error occurred during fetching. ${err.message}`);
         email.value = '';
         title.value = '';
-        codesnippets.value = '';
-        content.value = '';
+        description.value = '';
     }
 }

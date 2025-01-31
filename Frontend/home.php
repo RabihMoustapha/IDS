@@ -21,7 +21,7 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
 
 </head>
 
-<body onload='seeItem()'>
+<body>
     <header>
         <nav class='navbar navbar-expand-lg bg-body-tertiary'>
             <div class='container-fluid'>
@@ -38,7 +38,7 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
                             </a>
                         </li>
                     </ul>
-                    <form class='d-flex' role='search' action='javascript:void(0)' method='post' onsubmit='getData()' style='flex-grow: 1; margin-right: 10px;'>
+                    <form class='d-flex' role='search' action='../Backend/post.php' method='post' style='flex-grow: 1; margin-right: 10px;'>
                         <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' id='searchQuery'>
                         <button class='btn btn-outline-success' style='height: 38px;' type='submit'><img src='Images/search.png' style='height: 20px; width: 20px'></button>
                     </form>
@@ -48,25 +48,49 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
         </nav>
     </header>
 
-    <!--Container -->
-    <div class='data-container'>
-    </div>
+    <?php
+    include "../Backend/connection.php";
+    $query = "Select * from post";
+    $result = mysqli_query($Connection, $query);
+    $nbr = mysqli_num_rows($result);
+    ?>
+    <form action='../Backend/delete.php' method='post'>
+        <table class="data-block" cellspacing="25">
+            <tr>
+                <th>Title</th>
+                <th>Img</th>
+                <th>Description</th>
+            </tr>
+            <?php
+            for ($i = 0; $i < $nbr; $i++) {
+                $row = mysqli_fetch_assoc($result);
+                echo "<tr>";
+                echo "<input type='hidden' name='id' id='id'>";
+                echo "<td>$row[title]</td>";
+                echo "<td><img id='Img' src='Images/$row[img]' class='user'></td>";
+                echo "<td>$row[description]</td>";
+                echo "<td><img src='Images/delete.png' style='cursor: pointer' onclick=''></td>";
+                echo "</tr>";
+            }
+            echo "</table>";
+            echo "</form>";
+            ?>
 
-    <!--Footer-->
-    <footer class='footer'>
-        <div class='footer-container'>
-            <p>WebApi. All rights reserved.</p>
-            <ul class='footer-links'>
-                <li><a href='tel:+961818140764'>Phone Number</a></li>
-                <li><a href='mailto:mostapharabih59@gmail.com'>Email</a></li>
-                <li><a href='https://github.com/RabihMoustapha'>GitHub</a></li>
-            </ul>
-        </div>
-    </footer>
+            <!--Footer-->
+            <footer class='footer'>
+                <div class='footer-container'>
+                    <p>WebApi. All rights reserved.</p>
+                    <ul class='footer-links'>
+                        <li><a href='tel:+961818140764'>Phone Number</a></li>
+                        <li><a href='mailto:mostapharabih59@gmail.com'>Email</a></li>
+                        <li><a href='https://github.com/RabihMoustapha'>GitHub</a></li>
+                    </ul>
+                </div>
+            </footer>
 
-    <!--Scripts-->
-    <script type='text/javascript' src='JS/Home.js'></script>
-    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
+            <!--Scripts-->
+            <script type='text/javascript' src='JS/Home.js'></script>
+            <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
 
 </body>
 
