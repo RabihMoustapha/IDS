@@ -1,80 +1,55 @@
-<style>
-    * {
-        font-family: monospace;
-        font-weight: bold;
-    }
-
-    body {
-        background-size: cover;
-        background-position: center;
-        background: url("../Images/Background.jpeg");
-        color: white;
-    }
-
-    .data-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        justify-content: center;
-    }
-
-    .data-block {
-        width: 250px;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        text-align: center;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        background-color: #f9f9f9;
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .data-block:hover {
-        transform: scale(1.05);
-    }
-
-    .data-block img {
-        width: 100%;
-        height: auto;
-        border-radius: 8px;
-    }
-
-    .data-block h3 {
-        margin-top: 15px;
-        font-size: 18px;
-        font-weight: bold;
-    }
-
-    .data-block p {
-        margin: 5px 0;
-        color: #555;
-    }
-</style>
-
+<link href='../Frontend/CSS/Home.css' type='text/css' rel='stylesheet'>
+<div class='collapse navbar-collapse' id='navbarSupportedContent'>
+    <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
+        <li class='nav-item'>
+            <a class='nav-link active' aria-current='page' href='../Frontend/home.php' style='height: 38px;'>
+                Return to home
+            </a>
+        </li>
+    </ul>
+</div>
 <?php
 include 'connection.php';
-if (isset($_POST['search'])) {
-    $searchTerm = $_POST['searchQuery'];
-    $query = "SELECT * FROM post WHERE description LIKE $searchTerm";
-    $result = mysqli_query($Connection, $query);
-    $nbr = mysqli_num_rows($result);
-?>
-    <table class="data-block" cellspacing="25">
-        <tr>
-            <th>Title</th>
-            <th>Img</th>
-            <th>Description</th>
-        </tr>
-    <?php
-    for ($i = 0; $i < $nbr; $i++) {
-        $row = mysqli_fetch_assoc($result);
-        echo "<tr>";
-        echo "<td>$row[title]</td>";
-        echo "<td><img id='Img' src='../Frontend/Images/$row[img]'></td>";
-        echo "<td>$row[description]</td>";
-        echo "<td><a href='Delete/post.php?id=$row[id]'><img src='../Frontend/Images/delete.png' style='cursor: pointer'></a></td>";
-        echo "</tr>";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchQuery'])) {
+    $searchQuery = mysqli_real_escape_string($Connection, $_POST['searchQuery']);
+
+    $query = "SELECT * FROM post WHERE title LIKE ? OR description LIKE ?";
+    $stmt = mysqli_prepare($Connection, $query);
+
+    if ($stmt) {
+        $searchTerm = "%" . $searchQuery . "%";
+        mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+
+        $nbr = mysqli_num_rows($result);
+        if ($nbr > 0) {
+            echo "<table class='data-block' cellspacing='25'>
+                    <tr>
+                        <th>Title</th>
+                        <th>Img</th>
+                        <th>Description</th>
+                    </tr>";
+
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<tr>
+                        <td>" . htmlspecialchars($row['title']) . "</td>
+                        <td><img id='Img' src='../Frontend/Images/" . htmlspecialchars($row['img']) . "'></td>
+                        <td>" . htmlspecialchars($row['description']) . "</td>
+                        <td><a href='Delete/post.php?id=" . $row['id'] . "'><img src='../Frontend/Images/delete.png' style='cursor: pointer'></a></td>
+                    </tr>";
+            }
+            echo "</table>";
+        } else {
+            echo "<p>No results found for '$searchQuery'</p>";
+        }
+
+        mysqli_stmt_close($stmt);
+    } else {
+        echo "Error preparing query: " . mysqli_error($Connection);
     }
-    echo "</table>";
 }
-    ?>
+
+mysqli_close($Connection);
+?>

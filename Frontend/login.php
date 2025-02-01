@@ -41,6 +41,9 @@
         </div>
         <button class='btn btn-outline-success' type='submit'>Login</button>
     </form>
+    <a href='Profile/Create.php'>
+        If you dont have an acoount create one
+    </a>
 
     <!--Scripts-->
     <script type='text/javascript' src='JS/Profile/Login.js'></script>

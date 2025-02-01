@@ -1,8 +1,6 @@
 const email = document.getElementById('email');
 const password = document.getElementById('password');
-const container = document.getElementById('data-container');
 const profile = 'http://localhost/IDS/Backend/profile.php';
-const searchbar = 'http://localhost/IDS/Backend/searchbar.php';
 
 function isLoggedIn() {
     return localStorage.getItem('userToken');
