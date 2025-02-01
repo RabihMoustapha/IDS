@@ -38,8 +38,8 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
                             </a>
                         </li>
                     </ul>
-                    <form class='d-flex' role='search' action='../Backend/post.php' method='post' style='flex-grow: 1; margin-right: 10px;'>
-                        <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' id='searchQuery'>
+                    <form class='d-flex' role='search' action='../Backend/search.php' method='post' style='flex-grow: 1; margin-right: 10px;'>
+                        <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' name='searchQuery' id='searchQuery'>
                         <button class='btn btn-outline-success' style='height: 38px;' type='submit'><img src='Images/search.png' style='height: 20px; width: 20px'></button>
                     </form>
                     <button class='btn btn-outline-danger' type='button' onclick='logout()' style='height: 38px;'><img src='Images/logout.png' style='width: 20px; height: 20px;'></button>
@@ -54,7 +54,6 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
     $result = mysqli_query($Connection, $query);
     $nbr = mysqli_num_rows($result);
     ?>
-    <form action='../Backend/delete.php' method='post'>
         <table class="data-block" cellspacing="25">
             <tr>
                 <th>Title</th>
@@ -65,15 +64,13 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
             for ($i = 0; $i < $nbr; $i++) {
                 $row = mysqli_fetch_assoc($result);
                 echo "<tr>";
-                echo "<input type='hidden' name='id' id='id'>";
                 echo "<td>$row[title]</td>";
-                echo "<td><img id='Img' src='Images/$row[img]' class='user'></td>";
+                echo "<td><img id='Img' src='Images/$row[img]'></td>";
                 echo "<td>$row[description]</td>";
-                echo "<td><img src='Images/delete.png' style='cursor: pointer' onclick=''></td>";
+                echo "<td><a href='../Backend/Delete/post.php?id=$row[id]'><img src='Images/delete.png' style='cursor: pointer'></a></td>";
                 echo "</tr>";
             }
             echo "</table>";
-            echo "</form>";
             ?>
 
             <!--Footer-->

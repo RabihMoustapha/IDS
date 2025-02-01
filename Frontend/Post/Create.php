@@ -45,22 +45,22 @@
 
     <!--Adding labels-->
     <div class='container mt-5'>
-        <form class='row g-3 needs-validation' onsubmit='Create()'>
+        <form action='../../Backend/Create/post.php' method='POST' enctype='multipart/form-data'>
             <div class='mb-3'>
                 <label for='email' class='form-label'>Email address</label>
-                <input type='email' class='form-control' id='email' placeholder='name@example.com' required>
+                <input type='email' class='form-control' name='email' id='email' placeholder='name@example.com' required>
             </div>
             <div class='mb-3'>
                 <label for='title' class='form-label'>Title</label>
-                <textarea class='form-control' id='title' rows='3' required></textarea>
+                <textarea class='form-control' name='title' id='title' rows='3' required></textarea>
             </div>
             <div class='mb-3'>
-                <label for='codesnippets' class='form-label'>CodeSnippets</label>
-                <textarea class='form-control' id='codesnippets' rows='3' required></textarea>
+                <label for='description' class='form-label'>Description</label>
+                <textarea class='form-control' name='description' id='description' rows='5' required></textarea>
             </div>
             <div class='mb-3'>
-                <label for='content' class='form-label'>Content</label>
-                <textarea class='form-control' id='content' rows='5' required></textarea>
+                <label for='image'>Choose an image:</label>
+                <input type='file' id='image' name='image' accept='image/*'>
             </div>
             <button type='submit' class='btn btn-success'>Submit</button>
         </form>

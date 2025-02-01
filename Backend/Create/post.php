@@ -1,53 +1,48 @@
 <?php
-header('Content-Type: application/json');
-include '../db.php';
-$method = $_SERVER['REQUEST_METHOD'];
-$input = json_decode(file_get_contents('php://input'), true);
+include '../connection.php';
 
-switch ($method) {
-    case 'POST':
-        handleCreate($pdo, $input);
-        break;
-    default:
-        echo json_encode(['message' => 'Invalid request method']);
-        break;
-}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $email = mysqli_real_escape_string($Connection, $_POST['email']);
+    $title = mysqli_real_escape_string($Connection, $_POST['title']);
+    $description = mysqli_real_escape_string($Connection, $_POST['description']);
 
-function handleCreate($pdo, $input)
-{
-    if (empty($input['email']) || empty($input['title']) || empty($input['codesnippets']) || empty($input['content'])) {
-        echo json_encode(['success' => false, 'message' => 'All fields (email, title, codesnippets, content) are required.']);
-        return;
-    }
+    if (isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+        $image = $_FILES['image'];
+        $allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $maxFileSize = 5 * 1024 * 1024;
 
-    $email = filter_var($input['email'], FILTER_SANITIZE_EMAIL);
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo json_encode(['success' => false, 'message' => 'Invalid email format.']);
-        return;
-    }
+        if (in_array($image['type'], $allowedTypes) && $image['size'] <= $maxFileSize) {
+            $uploadDir = '../../Frontend/Images/';
+            $imagePath = $uploadDir . basename($image['name']);
 
-    $checkEmailQuery = 'SELECT email FROM profile WHERE email = :email';
-    $stmtCheck = $pdo->prepare($checkEmailQuery);
-    $stmtCheck->bindParam(':email', $email);
-    $stmtCheck->execute();
-    $emailExists = $stmtCheck->fetchColumn();
+            if (move_uploaded_file($image['tmp_name'], $imagePath)) {
+                $imagePath = mysqli_real_escape_string($Connection, $imagePath);
+                $query = 'INSERT INTO post (email, img, title, description) VALUES (?, ?, ?, ?)';
+                $stmt = mysqli_prepare($Connection, $query);
 
-    if ($emailExists > 0) {
-        echo json_encode(['success' => false, 'message' => 'Email does not exist in profile.']);
-        return;
-    }
+                if ($stmt) {
+                    mysqli_stmt_bind_param($stmt, 'ssss', $email, $imagePath, $title, $description);
 
-    $sql = 'INSERT INTO post (email, title, codesnippets, content) VALUES (:email, :title, :codesnippets, :content)';
-    $stmt = $pdo->prepare($sql);
-    $stmt->bindParam(':email', $email);
-    $stmt->bindParam(':title', $input['title']);
-    $stmt->bindParam(':codesnippets', $input['codesnippets']);
-    $stmt->bindParam(':content', $input['content']);
+                    if (mysqli_stmt_execute($stmt)) {
+                        header('Location: ../../Frontend/Home.php');
+                        exit();
+                    } else {
+                        echo 'Error executing query: ' . mysqli_error($Connection);
+                    }
 
-    if ($stmt->execute()) {
-        echo json_encode(['success' => true, 'message' => 'Post created successfully']);
+                    mysqli_stmt_close($stmt);
+                } else {
+                    echo 'Error preparing query: ' . mysqli_error($Connection);
+                }
+            } else {
+                echo 'Error uploading the image.';
+            }
+        } else {
+            echo 'Invalid file type or file size exceeded.';
+        }
     } else {
-        echo json_encode(['success' => false, 'message' => 'Post creation failed.']);
+        echo 'No image uploaded or error with the file upload.';
     }
 }
-?>
+
+mysqli_close($Connection);

@@ -15,7 +15,7 @@
 
 </head>
 
-<body onload='seeItem()'>
+<body>
     <header>
         <nav class='navbar navbar-expand-lg bg-body-tertiary'>
             <div class='container-fluid'>
@@ -27,23 +27,9 @@
                 <div class='collapse navbar-collapse' id='navbarSupportedContent'>
                     <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
                         <li class='nav-item'>
-                            <a class='nav-link active' aria-current='page' href='addpost.php' style='height: 38px;'>
+                            <a class='nav-link active' aria-current='page' href='../Post/Create.php' style='height: 38px;'>
                                 <img src='../Images/plus.png' style='width: 20px; height: 20px;'>
                             </a>
-                        </li>
-                        <li class='nav-item dropdown'>
-                            <a class='nav-link dropdown-toggle' href='#' role='button' data-bs-toggle='dropdown'
-                                aria-expanded='false'>
-                                <img src='../Images/delete.png' style='width: 20px; height: 20px;'>
-                            </a>
-                            <ul class='dropdown-menu'>
-                                <li><a class='dropdown-item' href='Post/Delete.php'>Post</a></li>
-                                <li><a class='dropdown-item' href='deletehistory.php'>History</a></li>
-                                <li>
-                                    <hr class='dropdown-divider'>
-                                </li>
-                                <li><a class='dropdown-item' href='deleteothers.php'>Others</a></li>
-                            </ul>
                         </li>
                     </ul>
                     <form class='d-flex' role='search' action='javascript:void(0)' method='post' onsubmit='getData()' style='flex-grow: 1; margin-right: 10px;'>
