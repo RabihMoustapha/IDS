@@ -33,8 +33,8 @@
                         </li>
                     </ul>
                     <form class='d-flex' role='search' action='javascript:void(0)' method='post' onsubmit='getData()' style='flex-grow: 1; margin-right: 10px;'>
-                        <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' id='searchQuery'>
-                        <button class='btn btn-outline-success' style='height: 38px;' type='submit'><img src='../Images/search.png' style='height: 20px; width: 20px'></button>
+                        <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' id='searchQuery' disabled>
+                        <button class='btn btn-outline-success' style='height: 38px;' type='submit' disabled><img src='../Images/search.png' style='height: 20px; width: 20px'></button>
                     </form>
                     <button class='btn btn-outline-danger' type='button' onclick='logout()' style='height: 38px;'><img src='../Images/logout.png' style='width: 20px; height: 20px;'></button>
                 </div>
@@ -42,7 +42,7 @@
         </nav>
     </header>
 
-    <form class='form-floating' action='javascript:void(0)' method='put' onsubmit='Update()'>
+    <form class='form-floating' action='../../Backend/Update/profile.php' method='put'>
         <div class='form-floating mb-3'>
             <input autocomplete='email' type='email' class='form-control' id='email' name='email' placeholder='email@example.com' required>
             <label for='email'>Email address</label>
@@ -61,9 +61,6 @@
     <!--Scripts-->
     <script type='text/javascript' src='../JS/Profile/Update.js'></script>
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
-
-    <!-- Data Container -->
-    <div class='data-container' id='data-container'></div>
 
     <!--Footer-->
     <footer class='footer'>
