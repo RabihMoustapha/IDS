@@ -3,7 +3,7 @@
     <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
         <li class='nav-item'>
             <a class='nav-link active' aria-current='page' href='../Frontend/home.php' style='height: 38px;'>
-                Return to home
+                <img src='../Frontend/Images/home.png' style='background: white; border-radius: 5px;height: 40px; width: 40px'>
             </a>
         </li>
     </ul>
@@ -11,7 +11,7 @@
 <?php
 include 'connection.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['searchQuery'])) {
+if (isset($_POST['searchQuery'])) {
     $searchQuery = mysqli_real_escape_string($Connection, $_POST['searchQuery']);
 
     $query = "SELECT * FROM post WHERE title LIKE ? OR description LIKE ?";

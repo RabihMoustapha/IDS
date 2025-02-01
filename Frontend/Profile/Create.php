@@ -25,13 +25,6 @@
                     <span class='navbar-toggler-icon'></span>
                 </button>
                 <div class='collapse navbar-collapse' id='navbarSupportedContent'>
-                    <ul class='navbar-nav me-auto mb-2 mb-lg-0'>
-                        <li class='nav-item'>
-                            <a class='nav-link active' aria-current='page' href='Post/Create.php' style='height: 38px;'>
-                                <img src='../Images/plus.png' style='width: 20px; height: 20px;'>
-                            </a>
-                        </li>
-                    </ul>
                     <form class='d-flex' role='search' action='javascript:void(0)' method='post' onsubmit='getData()' style='flex-grow: 1; margin-right: 10px;'>
                         <input class='form-control me-2' type='search' placeholder='Search' aria-label='Search' id='searchQuery' disabled>
                         <button class='btn btn-outline-success' style='height: 38px;' type='submit' disabled><img src='../Images/search.png' style='height: 20px; width: 20px'></button>
