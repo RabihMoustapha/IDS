@@ -18,7 +18,10 @@ if (isset($_POST['searchQuery'])) {
     $stmt = mysqli_prepare($Connection, $query);
 
     if ($stmt) {
+        //Arduino syntax that mean contain
         $searchTerm = "%" . $searchQuery . "%";
+
+        //ss for searchTerm type(string)
         mysqli_stmt_bind_param($stmt, "ss", $searchTerm, $searchTerm);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
