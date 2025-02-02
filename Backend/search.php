@@ -35,7 +35,7 @@ if (isset($_POST['searchQuery'])) {
     $stmt = mysqli_prepare($Connection, $query);
 
     if ($stmt) {
-        //Arduino syntax that mean contain
+        //Arduino syntax that mean can contain before or after the specified string
         $searchTerm = "%" . $searchQuery . "%";
 
         //ss for searchTerm type(string)
@@ -44,27 +44,23 @@ if (isset($_POST['searchQuery'])) {
         $result = mysqli_stmt_get_result($stmt);
 
         $nbr = mysqli_num_rows($result);
+        echo "<table>";
         if ($nbr > 0) {
-            echo "<table class='data-block' cellspacing='25'>
-                    <tr>
-                        <th>Title</th>
-                        <th>Img</th>
-                        <th>Description</th>
-                    </tr>";
-
+            echo "<table class='data-block' cellspacing='25'>";
             while ($row = mysqli_fetch_assoc($result)) {
-                echo "<tr>
-                        <td>" . htmlspecialchars($row['title']) . "</td>
-                        <td><img id='Img' src='../Frontend/Images/" . htmlspecialchars($row['img']) . "'></td>
-                        <td>" . htmlspecialchars($row['description']) . "</td>
-                        <td><a href='Delete/post.php?id=" . $row['id'] . "'><img src='../Frontend/Images/delete.png' style='cursor: pointer'></a></td>
-                    </tr>";
+                $img = $row['img'];
+                echo "<table class='data-block' cellspacing='25'>";
+                echo "<tr><td>" . htmlspecialchars($row['title']) . "</td></tr>";
+                echo "<tr><td><a href='comment.php?id=" . $row['id'] . "'><img id='Img' src='../Frontend/Images/" . htmlspecialchars($row['img']) . "'></td></tr>";
+                echo "<tr><td>" . htmlspecialchars($row['description']) . "</td></tr>";
+                echo "<tr><td><a href='Delete/post.php?id=" . $row['id'] . "'><img src='../Frontend/Images/delete.png' style='cursor: pointer; width: 50px'></a></td>";
+                echo "<td><a href='../Frontend/Images/" . $img . "' download><img src='../Frontend/Images/download.png' style='cursor: pointer; width: 30px'></a></td></tr>";
+                echo "</table>";
             }
-            echo "</table>";
         } else {
             echo "<p>No results found for '$searchQuery'</p>";
         }
-
+        echo "</table>";
         mysqli_stmt_close($stmt);
     } else {
         echo "Error preparing query: " . mysqli_error($Connection);

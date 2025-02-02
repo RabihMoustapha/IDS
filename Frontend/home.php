@@ -54,37 +54,36 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
     $result = mysqli_query($Connection, $query);
     $nbr = mysqli_num_rows($result);
     ?>
-        <table class="data-block" cellspacing="25">
-            <?php
-            for ($i = 0; $i < $nbr; $i++) {
-                $row = mysqli_fetch_assoc($result);
-                $img = $row['img'];
-                echo "<tr>";
-                echo "<td>$row[title]</td>";
-                echo "<td><img id='Img' src='Images/$row[img]'></td>";
-                echo "<td>$row[description]</td>";
-                echo "<td><a href='../Backend/Delete/post.php?id=$row[id]'><img src='Images/delete.png' style='cursor: pointer'></a></td>";
-                echo "<td><a href='../Images/" . $img . "' download><img src='Images/download.png'></a></td>";
-                echo "</tr>";
-            }
+    <table>
+        <?php
+        for ($i = 0; $i < $nbr; $i++) {
+            $row = mysqli_fetch_assoc($result);
+            $img = $row['img'];
+            echo "<table class='data-block' cellspacing='25'>";
+            echo "<tr><td>$row[title]</td></tr>";
+            echo "<tr><td><a href='../Backend/comment.php?id=$row[id]'><img id='Img' src='Images/$img' style='cursor: pointer'></a></td></tr>";
+            echo "<tr><td>$row[description]</td></tr>";
+            echo "<tr><td><a href='../Backend/Delete/post.php?id=$row[id]'><img src='Images/delete.png' style='cursor: pointer; width: 50px'></a></td>";
+            echo "<td><a href='Images/" . $img . "' download><img src='Images/download.png' style='cursor: pointer; width: 30px'></a></td></tr>";
             echo "</table>";
-            ?>
+        }
+        ?>
+    </table>
+    <!--Footer-->
+    <footer class='footer'>
+        <div class='footer-container'>
+            <p>WebApi. All rights reserved.</p>
+            <ul class='footer-links'>
+                <li><a href='tel:+961818140764'>Phone Number</a></li>
+                <li><a href='mailto:mostapharabih59@gmail.com'>Email</a></li>
+                <li><a href='https://github.com/RabihMoustapha'>GitHub</a></li>
+            </ul>
+        </div>
+    </footer>
 
-            <!--Footer-->
-            <footer class='footer'>
-                <div class='footer-container'>
-                    <p>WebApi. All rights reserved.</p>
-                    <ul class='footer-links'>
-                        <li><a href='tel:+961818140764'>Phone Number</a></li>
-                        <li><a href='mailto:mostapharabih59@gmail.com'>Email</a></li>
-                        <li><a href='https://github.com/RabihMoustapha'>GitHub</a></li>
-                    </ul>
-                </div>
-            </footer>
-
-            <!--Scripts-->
-            <script type='text/javascript' src='JS/Home.js'></script>
-            <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
+    <!--Scripts-->
+    <script type='text/javascript' src='JS/Home.js'></script>
+    <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js'></script>
 
 </body>
 
