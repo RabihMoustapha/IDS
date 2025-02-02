@@ -55,11 +55,6 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
     $nbr = mysqli_num_rows($result);
     ?>
         <table class="data-block" cellspacing="25">
-            <tr>
-                <th>Title</th>
-                <th>Img</th>
-                <th>Description</th>
-            </tr>
             <?php
             for ($i = 0; $i < $nbr; $i++) {
                 $row = mysqli_fetch_assoc($result);

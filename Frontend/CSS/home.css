@@ -177,3 +177,16 @@ table {
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(176, 176, 176, 0.2);
 }
+
+.nav-icon {
+  background: white;
+  border-radius: 5px;
+  height: 40px;
+  width: 40px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.nav-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
