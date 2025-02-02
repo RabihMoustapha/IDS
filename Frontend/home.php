@@ -58,11 +58,13 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
             <?php
             for ($i = 0; $i < $nbr; $i++) {
                 $row = mysqli_fetch_assoc($result);
+                $img = $row['img'];
                 echo "<tr>";
                 echo "<td>$row[title]</td>";
                 echo "<td><img id='Img' src='Images/$row[img]'></td>";
                 echo "<td>$row[description]</td>";
                 echo "<td><a href='../Backend/Delete/post.php?id=$row[id]'><img src='Images/delete.png' style='cursor: pointer'></a></td>";
+                echo "<td><a href='../Images/" . $img . "' download><img src='Images/download.png'></a></td>";
                 echo "</tr>";
             }
             echo "</table>";
