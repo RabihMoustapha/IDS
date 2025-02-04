@@ -60,11 +60,19 @@ if (isset($_GET['name']) && !empty($_GET['name']) & isset($_GET['password']) && 
             $row = mysqli_fetch_assoc($result);
             $img = $row['img'];
             echo "<table class='data-block' cellspacing='25'>";
+            echo "<tr>
+                    <td><a href='../Backend/comment.php?id=$row[id]'><img id='Img' src='Images/$img' style='cursor: pointer'></a></td>
+                    <td><a href='../Backend/Update/post.php?email=$row[email]&title=$row[title]&description=$row[description]'>Edit here</a></td>
+                </tr>";
             echo "<tr><td>$row[title]</td></tr>";
-            echo "<tr><td><a href='../Backend/comment.php?id=$row[id]'><img id='Img' src='Images/$img' style='cursor: pointer'></a></td></tr>";
             echo "<tr><td>$row[description]</td></tr>";
-            echo "<tr><td><a href='../Backend/Delete/post.php?id=$row[id]'><img src='Images/delete.png' style='cursor: pointer; width: 50px'></a></td>";
-            echo "<td><a href='Images/" . $img . "' download><img src='Images/download.png' style='cursor: pointer; width: 30px'></a></td></tr>";
+            echo "<tr>
+                    <td>
+                        <a href='../Backend/Delete/post.php?id=$row[id]'><img src='Images/delete.png' style='cursor: pointer; width: 50px'></a>
+                    </td>
+                    <td>$row[id]</td>
+                </tr>";
+            echo "<tr><th>By</th><td>$row[email]</td></tr>";
             echo "</table>";
         }
         ?>
